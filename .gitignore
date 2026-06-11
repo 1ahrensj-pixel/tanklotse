@@ -89,3 +89,4 @@ backend/prisma/*.js.map
 backend/tsconfig.build.tsbuildinfo
 admin-dashboard/tsconfig.tsbuildinfo
 landingpage/tsconfig.tsbuildinfo
+.github/workflows/
