@@ -1,0 +1,243 @@
+name: e2e
+
+# Fährt den vollen Stack (Postgres+Redis+Backend+Admin+Landing) hoch und
+# laesst Playwright + Probe-Scripts dagegen laufen. Verwendet ausschliesslich
+# Mock-Provider, damit KEIN externes API-Kontingent verbraucht wird.
+#
+# Audit-Bericht 2026-05-14: a11y (14 Tests), responsive (20 Tests),
+# backend-api (3 Tests), landingpage (3 Tests) = 40 Chromium-Tests
+# zzgl. 20 Webkit-Tests + Endpoint-Probes + Auth-Flow.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: tanklotse
+          POSTGRES_PASSWORD: tanklotse
+          POSTGRES_DB: tanklotse_e2e
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+
+    env:
+      # Backend-Pflichtvariablen (validation.ts blockt sonst den Bootstrap).
+      NODE_ENV: development
+      PORT: 3000
+      DATABASE_URL: postgresql://tanklotse:tanklotse@localhost:5432/tanklotse_e2e
+      REDIS_URL: redis://localhost:6379
+      JWT_ACCESS_SECRET: e2e-access-secret-must-be-32-chars-aaaa
+      JWT_REFRESH_SECRET: e2e-refresh-secret-must-be-32-chars-aaa
+      COOKIE_SECRET: e2e-cookie-secret-must-be-32-chars-aaaaa
+      JWT_ACCESS_TTL: 900
+      JWT_REFRESH_TTL: 2592000
+      CORS_ORIGINS: http://localhost:3001,http://localhost:3002
+      RATE_LIMIT_TTL: 60
+      RATE_LIMIT_MAX: 1000
+      # E2E + Probe-Scripts machen viele Auth-Calls/min — strenge
+      # Production-Limits wuerden die Suite selbst aussperren.
+      AUTH_RATE_LIMIT_LOGIN: 1000
+      AUTH_RATE_LIMIT_REGISTER: 1000
+      AUTH_RATE_LIMIT_FORGOT: 1000
+      AUTH_RATE_LIMIT_RESET: 1000
+      # Mock-Modi: keine externen Calls, kein API-Kontingent.
+      FUEL_PROVIDER: tankerkoenig
+      FUEL_PROVIDER_MODE: mock
+      TANKERKOENIG_API_KEY: replace-me
+      TANKERKOENIG_BASE_URL: https://example.invalid
+      ROUTING_ENABLED: 'false'
+      ROUTING_PROVIDER: noop
+      ROUTING_PROVIDER_MODE: mock
+      GEOCODER_PROVIDER: nominatim
+      GEOCODER_PROVIDER_MODE: mock
+      NOMINATIM_USER_AGENT: TankLotse/1.0 e2e-ci@example.test
+      NOMINATIM_BASE_URL: https://example.invalid
+      PUSH_PROVIDER: firebase
+      PUSH_PROVIDER_MODE: disabled
+      AUTH_PROVIDER_MODE: disabled
+      PAYMENT_PROVIDER_MODE: disabled
+      SUBSCRIPTIONS_ENABLED: 'false'
+      SUBSCRIPTION_PROVIDER: none
+      SMTP_ENABLED: 'false'
+      SENTRY_ENABLED: 'false'
+      ADMIN_SEED_EMAIL: admin@tanklotse.local
+      ADMIN_SEED_PASSWORD: e2e-ci-admin-password-min-12chars
+      SWAGGER_ENABLED: 'true'
+      # Landing + Admin
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+      NEXT_PUBLIC_SITE_URL: http://localhost:3001
+      NEXT_PUBLIC_SUPPORT_EMAIL: support@tanklotse.local
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: |
+            backend/package-lock.json
+            landingpage/package-lock.json
+            admin-dashboard/package-lock.json
+            tests/package-lock.json
+
+      # ----- Backend ------------------------------------------------------
+      - name: Backend install
+        working-directory: backend
+        run: npm ci --no-audit --no-fund
+
+      - name: Backend Prisma generate + migrate + seed
+        working-directory: backend
+        run: |
+          npx prisma generate
+          npx prisma migrate deploy
+          npm run seed
+
+      - name: Backend build
+        working-directory: backend
+        run: npm run build
+
+      - name: Backend start in background
+        working-directory: backend
+        run: |
+          nohup node dist/main.js > ../backend.log 2>&1 &
+          echo $! > ../backend.pid
+          # Wait for /health
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3000/health >/dev/null; then
+              echo "Backend healthy after ${i}*2s"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Backend did not become ready"
+          tail -50 ../backend.log
+          exit 1
+
+      # ----- Landingpage --------------------------------------------------
+      - name: Landingpage install + build
+        working-directory: landingpage
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Landingpage start in background (port 3001)
+        working-directory: landingpage
+        run: |
+          nohup npx next start -p 3001 > ../landing.log 2>&1 &
+          echo $! > ../landing.pid
+          for i in $(seq 1 20); do
+            if curl -sf http://localhost:3001/ >/dev/null; then
+              echo "Landing healthy after ${i}*2s"
+              exit 0
+            fi
+            sleep 2
+          done
+          tail -30 ../landing.log
+          exit 1
+
+      # ----- Admin-Dashboard ---------------------------------------------
+      - name: Admin install + build
+        working-directory: admin-dashboard
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Admin start in background (port 3002)
+        working-directory: admin-dashboard
+        run: |
+          nohup npx next start -p 3002 > ../admin.log 2>&1 &
+          echo $! > ../admin.pid
+          for i in $(seq 1 20); do
+            if curl -sf http://localhost:3002/ >/dev/null; then
+              echo "Admin healthy after ${i}*2s"
+              exit 0
+            fi
+            sleep 2
+          done
+          tail -30 ../admin.log
+          exit 1
+
+      # ----- Probe scripts -----------------------------------------------
+      - name: Endpoint probes
+        run: bash audit/probe-endpoints.sh
+
+      - name: Frontend route probes
+        env:
+          LANDING_URL: http://localhost:3001
+          ADMIN_URL: http://localhost:3002
+        run: bash audit/probe-frontend.sh
+
+      - name: Auth-Flow E2E
+        run: bash audit/probe-auth-flow.sh
+
+      - name: Edge-Cases
+        run: bash audit/probe-edge-cases.sh
+
+      # ----- Playwright ---------------------------------------------------
+      - name: Playwright install
+        working-directory: tests
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Playwright run
+        working-directory: tests
+        env:
+          LANDING_URL: http://localhost:3001
+          ADMIN_URL: http://localhost:3002
+          API_URL: http://localhost:3000
+        run: npx playwright test --project=chromium
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: tests/playwright-report/
+          if-no-files-found: ignore
+
+      - name: Upload server logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-logs
+          path: |
+            backend.log
+            landing.log
+            admin.log
+          if-no-files-found: ignore
+
+      # ----- Shutdown -----------------------------------------------------
+      - name: Stop servers
+        if: always()
+        run: |
+          for p in backend.pid landing.pid admin.pid; do
+            if [ -f "$p" ]; then
+              kill "$(cat $p)" 2>/dev/null || true
+            fi
+          done

@@ -1,0 +1,91 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+.yarn/
+*.log
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.turbo/
+coverage/
+
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+build/
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+android/.gradle/
+android/local.properties
+android/key.properties
+android/app/upload-keystore.jks
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Environment / secrets — NEVER commit
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+.env.staging-preview
+*.pem
+*.key
+secrets/
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Turborepo (PR #23 Slice F)
+.turbo/
+node_modules/
+turbo/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+.nyc_output/
+*.lcov
+
+# Database
+*.sqlite
+*.db
+postgres-data/
+redis-data/
+
+# Misc
+tmp/
+temp/
+.parcel-cache/
+
+# Test-Lauf-Artefakte (scripts/test-all.sh)
+audit/test-runs/
+
+# Build-Artefakte aus Entwicklungssitzungen
+backend/prisma/*.js
+backend/prisma/*.d.ts
+backend/prisma/*.js.map
+backend/tsconfig.build.tsbuildinfo
+admin-dashboard/tsconfig.tsbuildinfo
+landingpage/tsconfig.tsbuildinfo

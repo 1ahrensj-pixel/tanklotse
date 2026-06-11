@@ -1,0 +1,83 @@
+# gitleaks ignore file
+#
+# Format: <commit-sha>:<file>:<rule>:<line>
+#
+# Diese Datei whitelistet AUSSCHLIESSLICH false-positives in Doku/Beispielen.
+# Echte Secrets duerfen NIE hier stehen.
+
+# Beispiel-DB-Passwort `STARK1234567` in einem ENV-Block-Beispiel der
+# Staging-Runbook-Doku. Nie ein echtes Passwort, nur Platzhalter, der die
+# generic-api-key-Heuristik triggert. Im Working-Tree bereits durch
+# `<DB_PASSWORD>` ersetzt; die Git-History bleibt aus historischen Gruenden
+# bestehen.
+5cef31c3e09e144358cb286eae5c2a882de63528:docs/33-staging-deployment-runbook.md:generic-api-key:71
+
+# Audit 2026-05-06 §11 Aufgabe 1 (PR #6 Variant B):
+# Im urspruenglichen PR-#6-Commit wurden Platzhalter
+# `replace-with-min-32-characters` (Entropy 3.806) fuer JWT_ACCESS_SECRET /
+# JWT_REFRESH_SECRET / COOKIE_SECRET in den beiden ENV-Beispieldateien
+# committed. gitleaks `generic-api-key` traf darauf an.
+#
+# Im Working-Tree wurde der Platzhalter durch `please-set-strong-secret-min-32`
+# ersetzt (klar lesbarer Hinweis-Text, niedrigere Entropie, gitleaks-clean —
+# isoliert verifiziert). `isMeaningful()` erkennt diesen Default-Wert als
+# nicht konfiguriert, sodass die Validation den Start blockiert, falls der
+# Default-Wert eingecheckt bleibt.
+#
+# Die folgenden Fingerprints whitelisten ausschliesslich diese historischen
+# Commit-Eintraege, damit der gitleaks-Lauf gegen die git-History gruen wird.
+# Sie sind eng an Commit + Datei + Regel + Zeile gebunden — kein blanket
+# .env.example-Ignore und keine Deaktivierung der generic-api-key-Regel.
+#
+# Vor-Rebase-SHAs (urspruengliche PR-#6-Commits, koennen lokal noch via
+# reflog auftauchen — fuer CI nicht relevant):
+0ba90e2f9e8d000ba7e83c22ae28c00062ed9b53:.env.example:generic-api-key:30
+0ba90e2f9e8d000ba7e83c22ae28c00062ed9b53:.env.example:generic-api-key:31
+0ba90e2f9e8d000ba7e83c22ae28c00062ed9b53:.env.example:generic-api-key:34
+0ba90e2f9e8d000ba7e83c22ae28c00062ed9b53:.env.production.example:generic-api-key:33
+0ba90e2f9e8d000ba7e83c22ae28c00062ed9b53:.env.production.example:generic-api-key:34
+0ba90e2f9e8d000ba7e83c22ae28c00062ed9b53:.env.production.example:generic-api-key:37
+# Post-Rebase-SHAs (PR-#6-Commit nach Rebase auf main mit PR #5 — was die
+# CI nach Force-Push sieht):
+fb91c5fc538d4615d765832ed0241896f7651dab:.env.example:generic-api-key:30
+fb91c5fc538d4615d765832ed0241896f7651dab:.env.example:generic-api-key:31
+fb91c5fc538d4615d765832ed0241896f7651dab:.env.example:generic-api-key:34
+fb91c5fc538d4615d765832ed0241896f7651dab:.env.production.example:generic-api-key:33
+fb91c5fc538d4615d765832ed0241896f7651dab:.env.production.example:generic-api-key:34
+fb91c5fc538d4615d765832ed0241896f7651dab:.env.production.example:generic-api-key:37
+
+# Audit 2026-05-07 §22 Phase 8 / PR #12 Phase 4:
+# Drei false-positives im PR-#12-Hauptcommit `8565904`. Im Working-Tree
+# bereits durch `replace-me-with-...`-Platzhalter (Doku) bzw.
+# `unit-test-marker-*` (Sentinel-Tests) ersetzt — siehe nachfolgender
+# Fix-Commit. Die Git-History des Hauptcommits behaelt die alten Werte;
+# diese Fingerprints whitelisten ausschliesslich diese drei historischen
+# Eintraege, eng an Commit+Datei+Regel+Zeile gebunden.
+#
+# Begruendung:
+#   1. spec.ts Z.472 + 473: Sentinel-Strings fuer JSON-Substring-Pruefung
+#      (`expect(JSON.stringify(snapshot)).not.toContain(sentinel)`). Kein
+#      echter Tankerkoenig- oder Mapbox-Key — die Werte beginnen mit
+#      `sentinel-tk-` bzw. `sentinel-mb-` und sind in keinem System
+#      konfiguriert. Der Folge-Commit ersetzt sie durch low-entropy-
+#      Marker `unit-test-marker-*`.
+#   2. docs/63 Z.104: PEM-Privat-Key-Block-Beispiel ohne echten Schluessel.
+#      Der String enthaelt nur die Markierungen `-----BEGIN PRIVATE KEY-----
+#      \n...\n-----END PRIVATE KEY-----` als Format-Beispiel im Runbook —
+#      kein Schluessel-Material. Folge-Commit entfernt die Marker komplett
+#      und nutzt `replace-me-with-pem-from-...`.
+8565904154c59cc69a65cf8eec6dde54b73fdade:backend/src/admin/system/api-readiness.service.spec.ts:generic-api-key:472
+8565904154c59cc69a65cf8eec6dde54b73fdade:backend/src/admin/system/api-readiness.service.spec.ts:generic-api-key:473
+8565904154c59cc69a65cf8eec6dde54b73fdade:docs/63-api-key-onboarding-runbook.md:private-key:104
+
+# Slice G (Commit 8c9e5ad, PR #24 §7.4 — JWT-Dual-Secret-Pattern):
+# `jwt.strategy.spec.ts` enthielt im urspruenglichen Commit Test-Secrets der
+# Form `previous-secret-32-chars-min-xyzab` / `current-secret-32-chars-min-...`.
+# gitleaks `generic-api-key` schlug auf Entropy ~4.15 an. Es ist kein echtes
+# Secret — die Strings sind in keinem System konfiguriert, dienen nur als
+# Eingabe fuer `jwt.sign()` im Unit-Test und werden nach jedem Test wieder
+# aus process.env entfernt. Im Working-Tree sind sie durch low-entropy-Marker
+# `unit-test-marker-*` ersetzt (siehe Folge-Commit). Der historische Eintrag
+# bleibt in der Git-History und wird hier eng an Commit+Datei+Regel+Zeile
+# whitelistet.
+8c9e5ad7fcf06caccdfe9bb3e2ea610eb2c74007:backend/src/auth/strategies/jwt.strategy.spec.ts:generic-api-key:32

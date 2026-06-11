@@ -1,0 +1,25 @@
+{
+  "_source": "Realistischer Nachbau einer Nominatim /reverse-Antwort. Endpoint: https://nominatim.openstreetmap.org/reverse?lat=50.8913&lon=6.9946&format=jsonv2",
+  "_recordedAt": "2026-05-06",
+  "place_id": 33445566,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+  "osm_type": "way",
+  "osm_id": 8765432,
+  "lat": "50.8913",
+  "lon": "6.9946",
+  "category": "highway",
+  "type": "residential",
+  "addresstype": "road",
+  "name": "Hauptstrasse",
+  "display_name": "Hauptstrasse, Rodenkirchen, Köln, Nordrhein-Westfalen, 50996, Deutschland",
+  "address": {
+    "road": "Hauptstrasse",
+    "suburb": "Rodenkirchen",
+    "city": "Köln",
+    "state": "Nordrhein-Westfalen",
+    "postcode": "50996",
+    "country": "Deutschland",
+    "country_code": "de"
+  },
+  "boundingbox": ["50.8911", "50.8915", "6.9943", "6.9949"]
+}

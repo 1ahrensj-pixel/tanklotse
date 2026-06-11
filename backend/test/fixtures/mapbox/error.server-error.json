@@ -1,0 +1,9 @@
+{
+  "_source": "Mapbox-Antwort bei serverseitigem Fehler.",
+  "_recordedAt": "2026-05-06",
+  "httpStatus": 500,
+  "body": {
+    "message": "Internal Server Error"
+  },
+  "_expectedReason": "provider_error"
+}

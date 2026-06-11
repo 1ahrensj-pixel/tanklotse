@@ -1,0 +1,22 @@
+{
+  "_source": "Realistischer Nachbau eines Apple App Store Server Notification v2 Decoded-Payload (signedPayload entschluesselt). Schema: https://developer.apple.com/documentation/appstoreservernotifications/responsebodyv2decodedpayload",
+  "_recordedAt": "2026-05-06",
+  "notificationType": "DID_RENEW",
+  "subtype": "BILLING_RECOVERY",
+  "notificationUUID": "fixture-notification-uuid-only-not-real",
+  "data": {
+    "appAppleId": 1234567890,
+    "bundleId": "de.tanklotse.app",
+    "bundleVersion": "1.0.0",
+    "environment": "Sandbox",
+    "signedTransactionInfo": {
+      "transactionId": "fixture-transaction-id-only",
+      "originalTransactionId": "fixture-original-transaction-id",
+      "productId": "premium_monthly",
+      "purchaseDate": 1715000000000,
+      "expiresDate": 1717678400000,
+      "type": "Auto-Renewable Subscription",
+      "inAppOwnershipType": "PURCHASED"
+    }
+  }
+}

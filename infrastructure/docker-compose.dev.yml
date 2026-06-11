@@ -1,0 +1,99 @@
+# =============================================================================
+# TankLotse — Lokale Entwicklungs-Infrastruktur
+# =============================================================================
+# Startet alle Dienste, die das Backend/Frontend lokal brauchen:
+#   - Postgres + PostGIS (Geo-Radius-Suche)
+#   - Redis (Cache + Throttling)
+#   - Mailpit  (SMTP + Web-UI fuer Test-Mails)
+#   - Adminer  (Web-UI fuer DB-Inspektion)
+#
+# App-Services (Backend / Landing / Admin) laufen auf dem Host fuer schnelles
+# Hot-Reload. Wer den vollen Container-Stack will, nutzt `docker-compose.yml`.
+#
+# Port-Wahl: bewusst NICHT die Standards (5432/6379/8080/8025), damit dieser
+# Compose-File parallel zu anderen Dev-Stacks (z. B. solopilot-dev, klartext)
+# auf demselben Host laufen kann.
+#
+# Aufruf:
+#   docker compose -p tanklotse -f infrastructure/docker-compose.dev.yml up -d
+#   docker compose -p tanklotse -f infrastructure/docker-compose.dev.yml down
+# =============================================================================
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tanklotse
+      POSTGRES_PASSWORD: tanklotse
+      POSTGRES_DB: tanklotse
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tanklotse"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6381:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Lokaler SMTP-Catcher mit Web-UI. Backend kann gegen `SMTP_HOST=localhost
+  # SMTP_PORT=1026` testen, alle ausgehenden Mails landen in der UI auf :8026.
+  # Es werden NIE echte Mails verschickt.
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - "1026:1025"  # SMTP
+      - "8026:8025"  # Web-UI
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    volumes:
+      - mailpit-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O-", "http://localhost:8025/api/v1/info"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+      start_period: 5s
+
+  # DB-Inspektion via Browser. Default-Server = `postgres` (Compose-Hostname).
+  adminer:
+    image: adminer:4
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DEFAULT_DRIVER: pgsql
+      ADMINER_DESIGN: dracula
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O- http://localhost:8080 >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+      start_period: 5s
+
+volumes:
+  postgres-data:
+  redis-data:
+  mailpit-data:

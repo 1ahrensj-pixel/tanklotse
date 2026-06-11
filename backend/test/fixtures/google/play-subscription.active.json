@@ -1,0 +1,21 @@
+{
+  "_source": "Realistischer Nachbau einer Google Play Developer API Subscription-Antwort (purchases.subscriptionsv2.get). Schema: https://developers.google.com/android-publisher/api-ref/rest/v3/purchases.subscriptionsv2/get",
+  "_recordedAt": "2026-05-06",
+  "kind": "androidpublisher#subscriptionPurchaseV2",
+  "regionCode": "DE",
+  "lineItems": [
+    {
+      "productId": "premium_monthly",
+      "expiryTime": "2026-06-06T00:00:00Z",
+      "autoRenewingPlan": {
+        "autoRenewEnabled": true,
+        "priceChangeDetails": null
+      }
+    }
+  ],
+  "subscriptionState": "SUBSCRIPTION_STATE_ACTIVE",
+  "linkedPurchaseToken": null,
+  "latestOrderId": "GPA.fixture-order-id-only-not-real",
+  "acknowledgementState": "ACKNOWLEDGEMENT_STATE_ACKNOWLEDGED",
+  "testPurchase": { "kind": "androidpublisher#testPurchase" }
+}

@@ -1,0 +1,35 @@
+{
+  "_source": "Realistischer Nachbau eines Stripe-Subscription-Webhook-Events 'customer.subscription.updated' im Status active. Schema: https://docs.stripe.com/api/subscriptions/object",
+  "_recordedAt": "2026-05-06",
+  "id": "evt_fixture_active_only_not_real",
+  "object": "event",
+  "api_version": "2024-11-20.acacia",
+  "type": "customer.subscription.updated",
+  "livemode": false,
+  "data": {
+    "object": {
+      "id": "sub_fixture_active_only_not_real",
+      "object": "subscription",
+      "customer": "cus_fixture_only_not_real",
+      "status": "active",
+      "current_period_start": 1715000000,
+      "current_period_end": 1717678400,
+      "cancel_at_period_end": false,
+      "items": {
+        "object": "list",
+        "data": [
+          {
+            "id": "si_fixture_only",
+            "price": {
+              "id": "price_premium_monthly",
+              "currency": "eur",
+              "unit_amount": 499,
+              "recurring": { "interval": "month" }
+            },
+            "quantity": 1
+          }
+        ]
+      }
+    }
+  }
+}

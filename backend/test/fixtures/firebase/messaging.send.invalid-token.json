@@ -1,0 +1,15 @@
+{
+  "_source": "Realistischer Nachbau einer FCM-Fehlerantwort fuer ungueltigen Geraete-Token (UNREGISTERED). HTTP 404 / 400 abhaengig vom Server.",
+  "_recordedAt": "2026-05-06",
+  "error": {
+    "code": 404,
+    "message": "Requested entity was not found.",
+    "status": "NOT_FOUND",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.firebase.fcm.v1.FcmError",
+        "errorCode": "UNREGISTERED"
+      }
+    ]
+  }
+}

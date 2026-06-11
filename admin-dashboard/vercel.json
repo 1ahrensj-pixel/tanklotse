@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_comment": "PR #14 Staging-Preview. NEXT_PUBLIC_API_URL setzt der Operator im Vercel-Panel auf die Backend-Staging-URL — z.B. https://tanklotse-backend-staging.onrender.com. Niemals echte Secrets in dieser Datei committen.",
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": ".next",
+  "regions": ["fra1"],
+  "git": {
+    "deploymentEnabled": {
+      "deploy/staging-preview-mock": true
+    }
+  }
+}

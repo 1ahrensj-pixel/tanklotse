@@ -1,0 +1,27 @@
+{
+  "_source": "Realistischer Nachbau einer Tankerkoenig /prices-Antwort. Endpoint: https://creativecommons.tankerkoenig.de/json/prices.php?ids=<id>,<id>&apikey=...",
+  "_recordedAt": "2026-05-06",
+  "ok": true,
+  "license": "CC BY 4.0  -  https://creativecommons.tankerkoenig.de",
+  "data": "MTS-K",
+  "prices": {
+    "6ba7b810-9dad-11d1-80b4-00c04fd430c8": {
+      "status": "open",
+      "e5": 1.789,
+      "e10": 1.729,
+      "diesel": 1.659
+    },
+    "6ba7b811-9dad-11d1-80b4-00c04fd430c8": {
+      "status": "open",
+      "e5": 1.769,
+      "e10": 1.709,
+      "diesel": 1.629
+    },
+    "6ba7b812-9dad-11d1-80b4-00c04fd430c8": {
+      "status": "closed",
+      "e5": false,
+      "e10": false,
+      "diesel": false
+    }
+  }
+}

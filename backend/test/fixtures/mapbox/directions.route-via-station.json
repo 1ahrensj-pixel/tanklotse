@@ -1,0 +1,36 @@
+{
+  "_source": "Realistischer Nachbau einer Mapbox-Directions-Antwort fuer route-via-station Rodenkirchen → Station → Innenstadt. Aus zwei Calls zusammengefuegt: viaStation + direct.",
+  "_recordedAt": "2026-05-06",
+  "viaStation": {
+    "code": "Ok",
+    "routes": [
+      {
+        "distance": 6420.0,
+        "duration": 825.5,
+        "weight_name": "auto",
+        "geometry": null
+      }
+    ],
+    "waypoints": [
+      { "name": "Hauptstrasse", "location": [6.9946, 50.8913] },
+      { "name": "Bonner Strasse", "location": [7.0, 50.9] },
+      { "name": "Innenstadt", "location": [6.9583, 50.9413] }
+    ]
+  },
+  "direct": {
+    "code": "Ok",
+    "routes": [
+      {
+        "distance": 5980.0,
+        "duration": 740.2,
+        "weight_name": "auto",
+        "geometry": null
+      }
+    ],
+    "waypoints": [
+      { "name": "Hauptstrasse", "location": [6.9946, 50.8913] },
+      { "name": "Innenstadt", "location": [6.9583, 50.9413] }
+    ]
+  },
+  "_expectedExtraDistanceKm": 0.44
+}

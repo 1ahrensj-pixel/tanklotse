@@ -1,0 +1,48 @@
+name: deploy
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      # Bare-Metal / Docker-Compose-Deploy via SSH. Erwartet folgende
+      # Repository-Secrets:
+      #   * DEPLOY_HOST   — DNS-Name oder IP des Zielservers
+      #   * DEPLOY_USER   — Linux-User mit docker-Group-Mitgliedschaft
+      #   * DEPLOY_SSH_KEY— Privater SSH-Schluessel (ed25519 empfohlen)
+      # Auf dem Server muss /opt/tanklotse das Repository als Working-Tree
+      # enthalten und eine `.env.production`-Datei neben docker-compose.yml
+      # (also unter infrastructure/) mit allen Pflicht-Variablen liegen
+      # (siehe .env.production.example). Compose laedt automatisch NUR eine
+      # Datei namens `.env` — `.env.production` muss deshalb explizit per
+      # `--env-file` uebergeben werden, sonst werden alle Secrets als
+      # Leerstring interpoliert und das Backend crash-loopt.
+      #
+      # Deployt wird exakt der getaggte Release-Stand: GITHUB_REF_NAME
+      # (der v*-Tag aus dem Trigger) wird per `envs:` in die SSH-Session
+      # durchgereicht und ausgecheckt — NICHT der aktuelle main-HEAD.
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          envs: GITHUB_REF_NAME
+          script: |
+            set -euo pipefail
+            cd /opt/tanklotse
+            git fetch --all --tags
+            git checkout "${GITHUB_REF_NAME}"
+            docker compose \
+              --env-file /opt/tanklotse/infrastructure/.env.production \
+              -f infrastructure/docker-compose.yml \
+              -f infrastructure/docker-compose.production.yml \
+              up -d --build
+            docker image prune -f

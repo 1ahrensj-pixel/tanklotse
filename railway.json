@@ -1,0 +1,15 @@
+{
+  "_comment_1": "PR #14 Staging-Preview im Mock-Modus. Plattform: Railway. Aufruf: 'New Project from GitHub' und diesen Branch waehlen. Secrets per Railway-Panel — niemals in git committen.",
+  "_comment_2": "PR #15 Befund 5: KEIN expliziter startCommand mehr. Railway respektiert dann den Docker-ENTRYPOINT (./docker-entrypoint.sh), der zuerst `npx prisma migrate deploy` ausfuehrt und danach `node dist/main.js` startet. Frueher hatte `startCommand: node dist/main.js` den Entrypoint umgangen — Migrationen waeren still uebersprungen worden.",
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "backend/Dockerfile"
+  },
+  "deploy": {
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 30,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 5
+  }
+}

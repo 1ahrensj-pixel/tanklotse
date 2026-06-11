@@ -1,0 +1,161 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-tanklotse}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tanklotse}
+      POSTGRES_DB: ${POSTGRES_DB:-tanklotse}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tanklotse}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    # Slice B (PR #15-Audit §2.3): redis-cli ping ist im redis:7-alpine-Image
+    # vorhanden. Erlaubt jetzt `service_healthy`-depends_on in backend + nginx.
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build:
+      context: ../backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        # Slice B (PR #15-Audit §2.3): redis hat jetzt einen Healthcheck.
+        condition: service_healthy
+    environment:
+      # --- Pflicht in Production (validation.ts wirft sonst beim Start) ----
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-tanklotse}:${POSTGRES_PASSWORD:-tanklotse}@postgres:5432/${POSTGRES_DB:-tanklotse}
+      REDIS_URL: redis://redis:6379
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      JWT_ACCESS_TTL: ${JWT_ACCESS_TTL:-900}
+      JWT_REFRESH_TTL: ${JWT_REFRESH_TTL:-2592000}
+      # PR #15 Befund 4: COOKIE_SECRET fehlte komplett — validation.ts erzwingt
+      # ihn aber in Production. Ohne diese Zeile crashed der Container beim Start.
+      COOKIE_SECRET: ${COOKIE_SECRET}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3001,http://localhost:3002}
+      # PR #15 Befund 4: Swagger-Default in Production hart `false`.
+      SWAGGER_ENABLED: ${SWAGGER_ENABLED:-false}
+      # --- Provider-Auswahl + Mode (PR #11/#12) -----------------------------
+      FUEL_PROVIDER: ${FUEL_PROVIDER:-tankerkoenig}
+      FUEL_PROVIDER_MODE: ${FUEL_PROVIDER_MODE:-live}
+      TANKERKOENIG_API_KEY: ${TANKERKOENIG_API_KEY}
+      TANKERKOENIG_BASE_URL: ${TANKERKOENIG_BASE_URL:-https://creativecommons.tankerkoenig.de/json}
+      ROUTING_ENABLED: ${ROUTING_ENABLED:-false}
+      ROUTING_PROVIDER: ${ROUTING_PROVIDER:-noop}
+      ROUTING_PROVIDER_MODE: ${ROUTING_PROVIDER_MODE:-live}
+      MAPBOX_ACCESS_TOKEN: ${MAPBOX_ACCESS_TOKEN:-}
+      ROUTING_MAX_CANDIDATES: ${ROUTING_MAX_CANDIDATES:-10}
+      ROUTING_CONCURRENCY: ${ROUTING_CONCURRENCY:-4}
+      MAPBOX_TIMEOUT_MS: ${MAPBOX_TIMEOUT_MS:-4000}
+      MAPBOX_CACHE_TTL_S: ${MAPBOX_CACHE_TTL_S:-1800}
+      MAPBOX_DAILY_REQUEST_LIMIT: ${MAPBOX_DAILY_REQUEST_LIMIT:-1000}
+      MAPBOX_WARN_REQUESTS_PER_HOUR: ${MAPBOX_WARN_REQUESTS_PER_HOUR:-200}
+      GEOCODER_PROVIDER: ${GEOCODER_PROVIDER:-nominatim}
+      GEOCODER_PROVIDER_MODE: ${GEOCODER_PROVIDER_MODE:-live}
+      NOMINATIM_USER_AGENT: ${NOMINATIM_USER_AGENT}
+      NOMINATIM_BASE_URL: ${NOMINATIM_BASE_URL:-https://nominatim.openstreetmap.org}
+      # --- Optionale Adapter (Default disabled fuer sicheren Start) ---------
+      PUSH_ENABLED: ${PUSH_ENABLED:-false}
+      PUSH_PROVIDER: ${PUSH_PROVIDER:-firebase}
+      PUSH_PROVIDER_MODE: ${PUSH_PROVIDER_MODE:-disabled}
+      AUTH_PROVIDER_MODE: ${AUTH_PROVIDER_MODE:-disabled}
+      PAYMENT_PROVIDER_MODE: ${PAYMENT_PROVIDER_MODE:-disabled}
+      SUBSCRIPTIONS_ENABLED: ${SUBSCRIPTIONS_ENABLED:-false}
+      SUBSCRIPTION_PROVIDER: ${SUBSCRIPTION_PROVIDER:-none}
+      SMTP_ENABLED: ${SMTP_ENABLED:-false}
+      ALLOW_MOCK_PROVIDERS_IN_PRODUCTION: ${ALLOW_MOCK_PROVIDERS_IN_PRODUCTION:-false}
+      # --- Telemetrie (Default aus, Aktivierung in Phase 2) -----------------
+      SENTRY_ENABLED: ${SENTRY_ENABLED:-false}
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-}
+    healthcheck:
+      # Container-internes Curl reicht — Backend bindet auf 0.0.0.0:3000
+      test: ["CMD-SHELL", "wget -q -O- http://localhost:3000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    ports:
+      - "3000:3000"
+
+  landingpage:
+    build:
+      context: ../landingpage
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3001}
+      NEXT_PUBLIC_SUPPORT_EMAIL: ${NEXT_PUBLIC_SUPPORT_EMAIL:-support@tanklotse.de}
+    ports:
+      - "3001:3001"
+    # Slice B (PR #15-Audit §2.3): Next.js-Standalone hat keine eingebaute
+    # Health-Route — `/` antwortet 200, sobald `node server.js` ready ist.
+    # BusyBox-`wget` ist in `node:20-alpine` enthalten (Backend nutzt es
+    # bereits, siehe weiter unten). `start_period: 30s` puffert den
+    # Cold-Start (Next-Standalone braucht ~5-15s).
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:3001/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+
+  admin:
+    build:
+      context: ../admin-dashboard
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3000}
+    ports:
+      - "3002:3002"
+    # Slice B (PR #15-Audit §2.3): analog landingpage, Port 3002.
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:3002/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    # PR #15 Befund 4: nginx wartet aktiv auf Backend-Health.
+    # Slice B (PR #15-Audit §2.3): landingpage und admin haben jetzt
+    # ebenfalls Compose-Healthchecks und werden auf `service_healthy`
+    # umgestellt — nginx leitet keinen Traffic mehr auf Container, die
+    # noch im Cold-Start sind.
+    depends_on:
+      backend:
+        condition: service_healthy
+      landingpage:
+        condition: service_healthy
+      admin:
+        condition: service_healthy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+
+volumes:
+  postgres-data:
+  redis-data:

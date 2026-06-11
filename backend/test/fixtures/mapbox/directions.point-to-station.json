@@ -1,0 +1,27 @@
+{
+  "_source": "Realistischer Nachbau einer Mapbox-Directions-v5-Antwort fuer driving-route Rodenkirchen → Beispielstation. Endpoint: /directions/v5/mapbox/driving/<lng,lat;lng,lat>?overview=false",
+  "_recordedAt": "2026-05-06",
+  "code": "Ok",
+  "uuid": "fixture-point-to-station-uuid",
+  "waypoints": [
+    {
+      "distance": 0.0,
+      "name": "Hauptstrasse",
+      "location": [6.9946, 50.8913]
+    },
+    {
+      "distance": 12.4,
+      "name": "Bonner Strasse",
+      "location": [7.0, 50.9]
+    }
+  ],
+  "routes": [
+    {
+      "distance": 1820.5,
+      "duration": 235.7,
+      "weight": 285.4,
+      "weight_name": "auto",
+      "geometry": null
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+# =============================================================================
+# TankLotse — Docker Compose Override: PRODUCTION
+# =============================================================================
+# Slice B aus dem PR-#15-Audit (Section 2.2).
+#
+# Aufruf:
+#
+#   docker compose \
+#     --env-file infrastructure/.env.production \
+#     -f infrastructure/docker-compose.yml \
+#     -f infrastructure/docker-compose.production.yml \
+#     up -d
+#
+# Pflichten:
+#   * Secrets werden NIE in dieser Datei gesetzt — der Operator nutzt ein
+#     `.env.production`-File oder das Hoster-Panel. `.env.production` ist
+#     in `.gitignore`. ACHTUNG: Compose laedt automatisch NUR eine Datei
+#     namens `.env` im Projektverzeichnis — `.env.production` MUSS per
+#     `--env-file` (oder COMPOSE_ENV_FILES) uebergeben werden, sonst
+#     werden alle Interpolationen zu Leerstrings.
+#   * Production laeuft ausschliesslich mit ECHTEN Live-Keys. Mock-
+#     Provider sind hart blockiert (`ALLOW_MOCK_PROVIDERS_IN_PRODUCTION:
+#     false`).
+#   * Swagger ist hart `false` — kein Default-Override moeglich.
+#
+# Limitations:
+#   * Ports der Datenbank-Services (postgres:5432, redis:6379) sind in
+#     der Base-Datei nach aussen exposed. Compose-Overrides koennen
+#     Listen NICHT subtrahieren. Wer in Production die DB-Ports nicht
+#     oeffentlich haben will, muss die Base-Datei lokal anpassen oder
+#     den Server vor dem `up -d` per Firewall-Regel absichern (z.B.
+#     `ufw deny 5432`, `ufw deny 6379` von extern).
+#   * Resource-Limits stehen als Kommentar — der Operator setzt sie
+#     anhand der Zielserver-Spezifikation.
+# =============================================================================
+
+services:
+  backend:
+    environment:
+      NODE_ENV: production
+      APP_ENV: production
+      # Production: harte Werte (kein Default-Override moeglich).
+      SWAGGER_ENABLED: "false"
+      ALLOW_MOCK_PROVIDERS_IN_PRODUCTION: "false"
+      # Sentry-Environment-Label, falls Sentry aktiviert ist.
+      SENTRY_ENVIRONMENT: production
+      # Provider-Modi: Production zwingt `live`. Wer doch Mock will,
+      # muss `*_PROVIDER_MODE=mock` UND
+      # `ALLOW_MOCK_PROVIDERS_IN_PRODUCTION=true` setzen — die
+      # validation.ts wirft sonst.
+      FUEL_PROVIDER_MODE: live
+      ROUTING_PROVIDER_MODE: live
+      GEOCODER_PROVIDER_MODE: live
+    # Production-Log-Rotation gegen Disk-Fill (`docker logs` waechst
+    # sonst unbegrenzt).
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # Resource-Limits-Hint (auskommentiert) — Operator setzt anhand des
+    # Zielservers. Empfohlene Range (Hetzner CPX31, 4 vCPU/8 GB):
+    # mem_limit 1g, cpus 1.0.
+    # mem_limit: 1g
+    # cpus: 1.0
+
+  postgres:
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # mem_limit: 2g
+    # cpus: 1.0
+
+  redis:
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # mem_limit: 256m
+    # cpus: 0.5
+
+  landingpage:
+    environment:
+      NEXT_PUBLIC_APP_ENV: production
+      NEXT_PUBLIC_PROVIDER_SIMULATION_ACTIVE: "false"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # mem_limit: 384m
+    # cpus: 0.5
+
+  admin:
+    environment:
+      NEXT_PUBLIC_APP_ENV: production
+      NEXT_PUBLIC_PROVIDER_SIMULATION_ACTIVE: "false"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # mem_limit: 384m
+    # cpus: 0.5
+
+  nginx:
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # mem_limit: 128m
+    # cpus: 0.25

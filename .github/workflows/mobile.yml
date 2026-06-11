@@ -1,0 +1,28 @@
+name: mobile
+
+on:
+  push:
+    paths:
+      - 'mobile-app/**'
+      - '.github/workflows/mobile.yml'
+  pull_request:
+    paths:
+      - 'mobile-app/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          # pubspec verlangt flutter >=3.24 + dart >=3.5; 3.27.x ist der
+          # zuletzt lokal verifizierte Stable-Stand (29/29 Tests gruen).
+          flutter-version: '3.27.x'
+          channel: 'stable'
+      - working-directory: mobile-app
+        run: flutter pub get
+      - working-directory: mobile-app
+        run: flutter analyze
+      - working-directory: mobile-app
+        run: flutter test

@@ -1,0 +1,71 @@
+# =============================================================================
+# TankLotse — Docker Compose Override: STAGING
+# =============================================================================
+# Slice B aus dem PR-#15-Audit (Section 2.2).
+#
+# Aufruf:
+#
+#   docker compose \
+#     -f infrastructure/docker-compose.yml \
+#     -f infrastructure/docker-compose.staging.yml \
+#     up -d
+#
+# Pflichten:
+#   * Secrets werden NICHT in dieser Datei gesetzt — der Operator nutzt
+#     ein `.env`-File oder den Hoster-Panel. `.env.staging.example` ist
+#     die Vorlage; `.env.staging` ist in `.gitignore`.
+#   * Staging laeuft per Default mit ECHTEN Staging-Keys (live-Modi).
+#     Wer offline testen will, setzt einzelne `*_PROVIDER_MODE=mock` im
+#     ENV — die Base-Datei akzeptiert das via `${VAR:-live}`.
+#
+# Compose-Merge-Verhalten (relevant fuer dieses File):
+#   * `environment:` als Map → Keys werden hier PER KEY ueberschrieben.
+#   * `depends_on:` als Map → Bedingungen pro Service ueberschreibbar.
+#   * `ports:` und `volumes:` mergen ADDITIV — nicht subtrahierbar.
+# =============================================================================
+
+services:
+  backend:
+    environment:
+      NODE_ENV: staging
+      APP_ENV: ${APP_ENV:-staging}
+      # Staging darf Swagger ueber den Default zulassen; Operator kann
+      # explizit auf `false` setzen, wenn die Instanz oeffentlich ist.
+      SWAGGER_ENABLED: ${SWAGGER_ENABLED:-true}
+      # Sentry: vorbereitet, Default disabled (siehe docs/65 §1).
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-staging}
+      # Provider-Modi: Staging zielt auf ECHTE Staging-Keys. Einzelne
+      # Adapter koennen per ENV auf mock gestellt werden (offline-Tests).
+      FUEL_PROVIDER_MODE: ${FUEL_PROVIDER_MODE:-live}
+      ROUTING_PROVIDER_MODE: ${ROUTING_PROVIDER_MODE:-live}
+      GEOCODER_PROVIDER_MODE: ${GEOCODER_PROVIDER_MODE:-live}
+    # Resource-Hint (auskommentiert) — Operator setzt vor Go-Live auf
+    # die Zielserver-Werte. Empfohlene Staging-Range (Hetzner CPX21,
+    # 3 vCPU/4 GB): mem_limit 512m, cpus 0.5.
+    # mem_limit: 512m
+    # cpus: 0.5
+
+  postgres:
+    # mem_limit: 512m
+    # cpus: 0.5
+
+  redis:
+    # mem_limit: 128m
+    # cpus: 0.25
+
+  landingpage:
+    environment:
+      NEXT_PUBLIC_APP_ENV: staging-preview
+      # Mock-Banner war in PR #15 vorbereitet und ist hier per Default
+      # sichtbar — Staging soll fuer Tester klar als „nicht live"
+      # erkennbar sein.
+      NEXT_PUBLIC_PROVIDER_SIMULATION_ACTIVE: ${NEXT_PUBLIC_PROVIDER_SIMULATION_ACTIVE:-true}
+    # mem_limit: 256m
+    # cpus: 0.25
+
+  admin:
+    environment:
+      NEXT_PUBLIC_APP_ENV: staging-preview
+      NEXT_PUBLIC_PROVIDER_SIMULATION_ACTIVE: ${NEXT_PUBLIC_PROVIDER_SIMULATION_ACTIVE:-true}
+    # mem_limit: 256m
+    # cpus: 0.25

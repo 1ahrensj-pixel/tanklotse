@@ -1,0 +1,27 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "_comment": "PR #23 Slice F — Turborepo-Pipeline. Cacht Builds + Tests pro Workspace; CI kann optional `turbo run build` aufrufen anstatt jeden Projekt-Build einzeln. Bestehender per-Projekt-Workflow funktioniert ohne Anpassung.",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "test": {
+      "dependsOn": [],
+      "outputs": ["coverage/**"]
+    },
+    "test:contract": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "lint": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "providers:check": {
+      "dependsOn": [],
+      "cache": false,
+      "outputs": []
+    }
+  }
+}

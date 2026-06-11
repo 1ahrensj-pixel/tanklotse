@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_comment": "PR #14 Staging-Preview. Statisches Marketing-Frontend, keine Backend-Calls noetig. Branch deploy/staging-preview-mock wird automatisch deployed.",
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "regions": ["fra1"],
+  "git": {
+    "deploymentEnabled": {
+      "deploy/staging-preview-mock": true
+    }
+  }
+}

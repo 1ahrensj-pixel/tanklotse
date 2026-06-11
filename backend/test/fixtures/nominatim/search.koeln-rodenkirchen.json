@@ -1,0 +1,34 @@
+[
+  {
+    "_source": "Realistischer Nachbau einer Nominatim /search-Antwort. Endpoint: https://nominatim.openstreetmap.org/search?q=Koeln-Rodenkirchen&format=jsonv2&limit=5",
+    "_recordedAt": "2026-05-06",
+    "place_id": 12345678,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 901234,
+    "lat": "50.8946",
+    "lon": "6.9981",
+    "category": "boundary",
+    "type": "administrative",
+    "importance": 0.45,
+    "addresstype": "suburb",
+    "name": "Rodenkirchen",
+    "display_name": "Rodenkirchen, Köln, Nordrhein-Westfalen, Deutschland",
+    "boundingbox": ["50.8650", "50.9080", "6.9700", "7.0250"]
+  },
+  {
+    "place_id": 22334455,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 1023456,
+    "lat": "50.8913",
+    "lon": "6.9946",
+    "category": "place",
+    "type": "village",
+    "importance": 0.30,
+    "addresstype": "place",
+    "name": "Rodenkirchen Zentrum",
+    "display_name": "Rodenkirchen Zentrum, Köln, Nordrhein-Westfalen, 50996, Deutschland",
+    "boundingbox": ["50.8900", "50.8930", "6.9930", "6.9970"]
+  }
+]

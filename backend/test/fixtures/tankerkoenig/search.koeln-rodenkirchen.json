@@ -1,0 +1,58 @@
+{
+  "_source": "Realistischer Nachbau einer Tankerkoenig /list-Antwort fuer Koeln-Rodenkirchen (lat=50.8913, lng=6.9946, rad=5, type=diesel). Felder + Reihenfolge analog https://creativecommons.tankerkoenig.de/swagger/.",
+  "_recordedAt": "2026-05-06",
+  "ok": true,
+  "license": "CC BY 4.0  -  https://creativecommons.tankerkoenig.de",
+  "data": "MTS-K",
+  "status": "ok",
+  "stations": [
+    {
+      "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "name": "Aral Tankstelle Koeln Rodenkirchen",
+      "brand": "ARAL",
+      "street": "Hauptstrasse",
+      "houseNumber": "12",
+      "postCode": 50996,
+      "place": "Koeln",
+      "lat": 50.8923,
+      "lng": 6.9952,
+      "dist": 0.12,
+      "diesel": 1.659,
+      "e5": 1.789,
+      "e10": 1.729,
+      "isOpen": true
+    },
+    {
+      "id": "6ba7b811-9dad-11d1-80b4-00c04fd430c8",
+      "name": "Shell Koeln Rodenkirchen",
+      "brand": "SHELL",
+      "street": "Bonner Strasse",
+      "houseNumber": "234",
+      "postCode": 50968,
+      "place": "Koeln",
+      "lat": 50.8895,
+      "lng": 6.9889,
+      "dist": 0.86,
+      "diesel": 1.629,
+      "e5": 1.769,
+      "e10": 1.709,
+      "isOpen": true
+    },
+    {
+      "id": "6ba7b812-9dad-11d1-80b4-00c04fd430c8",
+      "name": "JET Koeln Hahnwald",
+      "brand": "JET",
+      "street": "Bonner Landstrasse",
+      "houseNumber": "5",
+      "postCode": 50996,
+      "place": "Koeln",
+      "lat": 50.8770,
+      "lng": 6.9920,
+      "dist": 1.55,
+      "diesel": 1.609,
+      "e5": 1.749,
+      "e10": 1.689,
+      "isOpen": false
+    }
+  ]
+}

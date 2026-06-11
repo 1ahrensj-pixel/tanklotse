@@ -1,0 +1,68 @@
+name: security
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 6 * * 1'
+
+# Minimal-Rechte fuer den Workflow. Ohne diese laeuft `gitleaks-action` bei
+# privaten Repos in 403-Fehler ("Resource not accessible by integration"),
+# weil die Action GitHub-API-Calls auf die PR-Commits macht.
+# Wir setzen Lese-Rechte explizit und nutzen zusaetzlich einen CLI-basierten
+# Scan, der KEINEN Zugriff auf die PR-API braucht — robust und reproduzierbar.
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks (CLI)
+        run: |
+          set -euo pipefail
+          GITLEAKS_VERSION=8.24.3
+          curl -sSL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" -o /tmp/gitleaks.tar.gz
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          sudo mv /tmp/gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+
+      - name: Secret-Scan (gitleaks detect)
+        run: |
+          set -euo pipefail
+          # `detect` scannt sowohl Working-Tree als auch Git-History.
+          # `--redact` blendet potenzielle Treffer in den Logs aus,
+          # damit Secrets nie versehentlich in Action-Logs landen.
+          gitleaks detect \
+            --source . \
+            --redact \
+            --verbose \
+            --report-format sarif \
+            --report-path /tmp/gitleaks.sarif \
+            --no-banner
+
+      - name: Upload SARIF (auch bei Erfolg, fuer GitHub-Code-Scanning)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-sarif
+          path: /tmp/gitleaks.sarif
+          if-no-files-found: ignore
+
+  api-key-not-in-mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tankerkönig-Key darf NICHT im Mobile-Code stehen
+        run: |
+          set -e
+          if grep -RIn --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=build \
+             -e 'TANKERKOENIG_API_KEY' mobile-app/ ; then
+            echo "::error::TANKERKOENIG_API_KEY taucht im Mobile-Code auf — verboten."
+            exit 1
+          fi

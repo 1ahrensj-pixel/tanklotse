@@ -1,0 +1,28 @@
+{
+  "_source": "Realistischer Nachbau eines Stripe-'customer.subscription.deleted'-Events.",
+  "_recordedAt": "2026-05-06",
+  "id": "evt_fixture_canceled_only_not_real",
+  "object": "event",
+  "api_version": "2024-11-20.acacia",
+  "type": "customer.subscription.deleted",
+  "livemode": false,
+  "data": {
+    "object": {
+      "id": "sub_fixture_canceled_only_not_real",
+      "object": "subscription",
+      "customer": "cus_fixture_only_not_real",
+      "status": "canceled",
+      "canceled_at": 1715002000,
+      "ended_at": 1715002000,
+      "items": {
+        "object": "list",
+        "data": [
+          {
+            "id": "si_fixture_only",
+            "price": { "id": "price_premium_monthly" }
+          }
+        ]
+      }
+    }
+  }
+}

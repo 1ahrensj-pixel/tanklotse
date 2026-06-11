@@ -1,0 +1,6 @@
+{
+  "_source": "Kein Mapbox-HTTP-Body — Timeout zwingt unseren Client in die Fallback-Form. axios.AxiosError.code='ECONNABORTED' / 'ERR_CANCELED'.",
+  "_recordedAt": "2026-05-06",
+  "axiosCode": "ECONNABORTED",
+  "_expectedReason": "provider_timeout"
+}

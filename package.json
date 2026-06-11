@@ -1,0 +1,33 @@
+{
+  "name": "tanklotse-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "_comment": "PR #23 Slice F — minimaler Monorepo-Root mit Turborepo als optionalem Build-Orchestrator. Existierende per-projekt-Workflows (.github/workflows/{backend,web,mobile,security}.yml) bleiben unveraendert; turbo ist additiv. pnpm-workspaces sind vorbereitet, aber die existierende `npm install`-Toolchain in jedem Projekt funktioniert weiter — der Operator kann jederzeit zwischen npm und pnpm wechseln.",
+  "workspaces": [
+    "backend",
+    "admin-dashboard",
+    "landingpage"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "build:backend": "npm run build --prefix backend",
+    "build:admin": "npm run build --prefix admin-dashboard",
+    "build:landing": "npm run build --prefix landingpage",
+    "test:backend": "npm test --prefix backend",
+    "test:contract": "npm run test:contract --prefix backend",
+    "lint:backend": "npm run lint --prefix backend",
+    "lint:admin": "npm run lint --prefix admin-dashboard",
+    "lint:landing": "npm run lint --prefix landingpage",
+    "lint:all": "npm run lint:backend && npm run lint:admin && npm run lint:landing",
+    "test:all": "npm run test:backend && npm run test:contract",
+    "check": "npm run lint:all && npm run test:all && npm run build:backend && npm run build:admin && npm run build:landing"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

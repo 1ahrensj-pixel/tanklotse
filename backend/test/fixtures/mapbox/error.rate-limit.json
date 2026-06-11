@@ -1,0 +1,14 @@
+{
+  "_source": "Mapbox-Antwort bei Rate-Limit-Ueberschreitung. Header: X-Rate-Limit-Limit/Remaining; Body kommt als Klartext oder JSON mit message=Rate limit exceeded.",
+  "_recordedAt": "2026-05-06",
+  "httpStatus": 429,
+  "headers": {
+    "x-rate-limit-limit": "300",
+    "x-rate-limit-remaining": "0",
+    "x-rate-limit-reset": "1715000060"
+  },
+  "body": {
+    "message": "Rate limit exceeded"
+  },
+  "_expectedReason": "provider_rate_limited"
+}
