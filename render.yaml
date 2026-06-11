@@ -1,79 +1,81 @@
-# PR #14 Staging-Preview im Mock-Modus. Plattform: Render.
-# Aufruf: in Render Dashboard "New Blueprint" mit diesem Repo +
-# Branch `deploy/staging-preview-mock`.
-#
-# Wichtig: alle Secret-ENV-Variablen werden per Render-Panel gesetzt
-# (sync=false), niemals in dieser YAML committed.
+# =============================================================================
+# TankLotse — Production-Blueprint (Render)
+# =============================================================================
+# Branch: main. Echte Spritpreise (Tankerkoenig live), Resend-Mail.
+# Secrets (sync:false) werden per Render-Panel / API gesetzt — nie in git.
+# =============================================================================
 
 services:
   - type: web
-    name: tanklotse-backend-staging
+    name: tanklotse-backend
     plan: starter
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     healthCheckPath: /health
     autoDeploy: true
-    branch: deploy/staging-preview-mock
+    branch: main
     envVars:
-      # --- Mock-Modus (PR #14) ---
       - key: NODE_ENV
-        value: staging
+        value: production
       - key: PORT
         value: "3000"
       - key: APP_NAME
         value: TankLotse
       - key: APP_ENV
-        value: staging-preview
-      # Provider-Modi: alle Mock/Disabled — keine externen Calls.
+        value: production
+      # --- Provider: ECHTE Spritpreise, kostenloser Geocoder, Rest aus ---
       - key: FUEL_PROVIDER
         value: tankerkoenig
       - key: FUEL_PROVIDER_MODE
-        value: mock
-      - key: ROUTING_PROVIDER
-        value: mapbox
-      - key: ROUTING_PROVIDER_MODE
-        value: mock
-      - key: ROUTING_ENABLED
-        value: "true"
+        value: live
+      - key: TANKERKOENIG_BASE_URL
+        value: https://creativecommons.tankerkoenig.de/json
+      - key: TANKERKOENIG_API_KEY
+        sync: false
       - key: GEOCODER_PROVIDER
         value: nominatim
       - key: GEOCODER_PROVIDER_MODE
-        value: mock
-      - key: PUSH_PROVIDER
-        value: firebase
+        value: live
+      - key: NOMINATIM_BASE_URL
+        value: https://nominatim.openstreetmap.org
+      - key: NOMINATIM_USER_AGENT
+        value: "TankLotse/1.0 (+https://tanklotse-landing.onrender.com)"
+      - key: GEOCODER_BASE_URL
+        value: https://nominatim.openstreetmap.org
+      - key: GEOCODER_USER_AGENT
+        value: "TankLotse/1.0 (+https://tanklotse-landing.onrender.com)"
+      - key: ROUTING_ENABLED
+        value: "false"
+      - key: ROUTING_PROVIDER
+        value: noop
+      - key: ROUTING_PROVIDER_MODE
+        value: disabled
+      - key: PUSH_ENABLED
+        value: "false"
       - key: PUSH_PROVIDER_MODE
         value: disabled
       - key: AUTH_PROVIDER_MODE
         value: disabled
       - key: PAYMENT_PROVIDER_MODE
         value: disabled
+      - key: SUBSCRIPTIONS_ENABLED
+        value: "false"
+      - key: SUBSCRIPTION_PROVIDER
+        value: none
       - key: ALLOW_MOCK_PROVIDERS_IN_PRODUCTION
         value: "false"
-      # Routing-Cost-Controls: Mock liefert ohnehin keinen API-Verkehr.
-      - key: ROUTING_MAX_CANDIDATES
-        value: "10"
-      - key: ROUTING_CONCURRENCY
-        value: "4"
-      - key: MAPBOX_TIMEOUT_MS
-        value: "4000"
-      - key: MAPBOX_CACHE_TTL_S
-        value: "1800"
-      - key: MAPBOX_DAILY_REQUEST_LIMIT
-        value: "1000"
-      - key: MAPBOX_WARN_REQUESTS_PER_HOUR
-        value: "200"
-      # Datenbank + Redis: Render-managed Services (s.u.).
+      # --- DB + Cache (Render-managed) ---
       - key: DATABASE_URL
         fromDatabase:
-          name: tanklotse-postgres-staging
+          name: tanklotse-postgres
           property: connectionString
       - key: REDIS_URL
         fromService:
-          name: tanklotse-redis-staging
+          name: tanklotse-redis
           type: redis
           property: connectionString
-      # Secrets: Operator setzt im Panel, sync=false → niemals in YAML/git.
+      # --- Auth-Secrets (sync:false → per API gesetzt) ---
       - key: JWT_ACCESS_SECRET
         sync: false
       - key: JWT_REFRESH_SECRET
@@ -84,59 +86,67 @@ services:
         value: "900"
       - key: JWT_REFRESH_TTL
         value: "2592000"
-      # CORS auf zukuenftige Frontend-URLs — Operator passt nach Vercel-Deploy an.
       - key: CORS_ORIGINS
         sync: false
-      # Nominatim-Pflicht-Header.
-      - key: NOMINATIM_USER_AGENT
-        value: "TankLotse-Staging-Preview/1.0 (+https://github.com/1ahrensj-pixel/tankengpt)"
+      # --- Mail (Resend) ---
+      - key: SMTP_ENABLED
+        value: "true"
+      - key: SMTP_HOST
+        value: smtp.resend.com
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_USER
+        value: resend
+      - key: SMTP_PASS
+        sync: false
+      - key: MAIL_FROM
+        value: onboarding@resend.dev
+      - key: SMTP_FROM
+        value: "TankLotse <onboarding@resend.dev>"
+      # --- Admin-Seed (sync:false) ---
+      - key: ADMIN_SEED_EMAIL
+        value: 1ahrensj@gmail.com
+      - key: ADMIN_SEED_PASSWORD
+        sync: false
+      - key: SWAGGER_ENABLED
+        value: "false"
 
-  # ---------------------------------------------------------------------------
-  # Landingpage (Next.js standalone, Docker).
-  # WICHTIG: NEXT_PUBLIC_* wird zur BUILD-Zeit eingebacken — die Dockerfiles
-  # deklarieren passende ARGs, Render reicht envVars als Build-Args durch.
-  # ---------------------------------------------------------------------------
   - type: web
-    name: tanklotse-landing-staging
+    name: tanklotse-landing
     plan: starter
     runtime: docker
     dockerfilePath: ./landingpage/Dockerfile
     dockerContext: ./landingpage
     healthCheckPath: /
     autoDeploy: true
-    branch: deploy/staging-preview-mock
+    branch: main
     envVars:
       - key: NEXT_PUBLIC_SITE_URL
-        sync: false # z. B. https://tanklotse-landing-staging.onrender.com
+        value: https://tanklotse-landing.onrender.com
       - key: NEXT_PUBLIC_SUPPORT_EMAIL
-        value: support@tanklotse.de
+        value: 1ahrensj@gmail.com
 
-  # ---------------------------------------------------------------------------
-  # Admin-Dashboard (Next.js standalone, Docker).
-  # NEXT_PUBLIC_API_URL MUSS auf die Backend-URL zeigen — sie steuert
-  # API-Basis UND CSP connect-src. Ohne sie ist der Admin-Login tot
-  # (Red-Team-Befund: CSP blockte alle API-Calls).
-  # ---------------------------------------------------------------------------
   - type: web
-    name: tanklotse-admin-staging
+    name: tanklotse-admin
     plan: starter
     runtime: docker
     dockerfilePath: ./admin-dashboard/Dockerfile
     dockerContext: ./admin-dashboard
     healthCheckPath: /login
     autoDeploy: true
-    branch: deploy/staging-preview-mock
+    branch: main
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        sync: false # z. B. https://tanklotse-backend-staging.onrender.com
+        value: https://tanklotse-backend.onrender.com
 
 databases:
-  - name: tanklotse-postgres-staging
+  - name: tanklotse-postgres
     plan: starter
-    databaseName: tanklotse_staging
+    databaseName: tanklotse
     user: tanklotse
+    postgresMajorVersion: "16"
 
-  - name: tanklotse-redis-staging
+  - name: tanklotse-redis
     type: redis
     plan: starter
     ipAllowList: []
