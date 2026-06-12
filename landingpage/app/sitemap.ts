@@ -4,7 +4,7 @@ import { posts } from './blog/posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tanklotse.de';
-  const paths = ['', '/funktionen', '/privat', '/firmen', '/preise', '/datenschutz', '/impressum', '/datenquelle', '/kontakt', '/app', '/blog'];
+  const paths = ['', '/funktionen', '/privat', '/firmen', '/preise', '/datenschutz', '/impressum', '/datenquelle', '/kontakt', '/download', '/blog'];
   const lastModified = new Date();
   const staticEntries: MetadataRoute.Sitemap = paths.map((p) => ({
     url: `${base}${p}`,

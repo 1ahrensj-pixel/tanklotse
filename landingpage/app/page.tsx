@@ -66,7 +66,7 @@ export default function HomePage() {
               >
                 Jetzt im Browser nutzen
               </a>
-              <Link href="/app" className="btn-ghost">App holen</Link>
+              <Link href="/download" className="btn-ghost">App holen</Link>
             </div>
             <p className="mt-6 text-xs text-brand-800 dark:text-brand-100">
               Direkt im Browser — keine Installation nötig. Auch für iOS und Android als App.
@@ -167,7 +167,7 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold">Bereit für die nächste Tankfahrt?</h2>
             <p className="mt-1">Lade TankLotse für iOS oder Android — kostenlos.</p>
           </div>
-          <Link href="/app" className="rounded-md bg-white text-brand-700 px-6 py-3 font-semibold hover:bg-brand-50">
+          <Link href="/download" className="rounded-md bg-white text-brand-700 px-6 py-3 font-semibold hover:bg-brand-50">
             Zur App-Download-Seite
           </Link>
         </div>

@@ -32,7 +32,7 @@ export function SiteFooter() {
           <div className="font-semibold">Kontakt</div>
           <ul className="mt-2 space-y-1">
             <li><Link href="/kontakt">Kontakt</Link></li>
-            <li><Link href="/app">App-Download</Link></li>
+            <li><Link href="/download">App-Download</Link></li>
           </ul>
         </div>
       </div>

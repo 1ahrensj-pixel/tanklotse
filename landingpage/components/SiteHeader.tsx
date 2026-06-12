@@ -23,7 +23,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <Link href="/app" className="btn-primary text-sm">
+        <Link href="/download" className="btn-primary text-sm">
           App holen
         </Link>
       </div>
