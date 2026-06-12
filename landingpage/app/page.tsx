@@ -1,5 +1,10 @@
 import Link from 'next/link';
 
+// Homepage dynamisch rendern (kein 1-Jahr-Prerender-Cache): Render hielt sonst
+// eine veraltete /-Antwort fest (s-maxage=31536000, x-nextjs-cache HIT).
+// force-dynamic garantiert frische Inhalte bei jedem Request.
+export const dynamic = 'force-dynamic';
+
 // Ehrliche Einwandbehandlung — Quelle fuer Sektion + JSON-LD (SEO Rich Results).
 // Keine erfundenen Testimonials: vor Launch gibt es keine echten Nutzerstimmen.
 const faqs = [
