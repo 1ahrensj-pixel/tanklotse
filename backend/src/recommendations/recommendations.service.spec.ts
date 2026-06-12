@@ -462,7 +462,9 @@ describe('RecommendationsService', () => {
     });
 
     expect(result.recommendations.length).toBe(1);
-    // Der gespeicherte Eintrag muss die kleinste gesehene distanceKm tragen.
-    expect(result.recommendations[0].extraDistanceKm).toBeCloseTo(1.2, 5);
+    // Der gespeicherte Eintrag muss die kleinste gesehene distanceKm (1.2)
+    // tragen — ohne exaktes Routing auf eine Straßen-Fahrstrecke hochgerechnet
+    // (Luftlinie × Default-Straßenfaktor 1.3).
+    expect(result.recommendations[0].extraDistanceKm).toBeCloseTo(1.2 * 1.3, 5);
   });
 });

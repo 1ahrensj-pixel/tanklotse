@@ -24,10 +24,10 @@ void main() {
       expect(l.longLabel, contains('geschätzten Distanz entlang der Route'));
     });
 
-    test('estimated + point_to_station → "geschätzte Entfernung"', () {
+    test('estimated + point_to_station → "geschätzte Fahrstrecke"', () {
       const l = DistanceLabel(isPrecise: false, isRouteContext: false);
-      expect(l.shortSuffix, contains('geschätzte Entfernung'));
-      expect(l.longLabel, contains('Luftlinien-Schätzung'));
+      expect(l.shortSuffix, contains('geschätzte Fahrstrecke'));
+      expect(l.longLabel, contains('Straßen-Fahrstrecke'));
     });
   });
 }

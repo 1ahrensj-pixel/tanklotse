@@ -29,11 +29,11 @@ void main() {
 
   // Audit 2026-05-06 §14 Aufgabe 6 + §13 Aufgabe 4: Distanz-Suffix
   // unterscheidet 4 Faelle.
-  testWidgets('Default (estimated + point_to_station) → "(geschätzte Entfernung)"', (tester) async {
+  testWidgets('Default (estimated + point_to_station) → "(geschätzte Fahrstrecke)"', (tester) async {
     await tester.pumpWidget(wrap(
       const BreakEvenBadge(breakEvenLiters: 20, tankLiters: 50),
     ),);
-    expect(find.textContaining('(geschätzte Entfernung)'), findsOneWidget);
+    expect(find.textContaining('(geschätzte Fahrstrecke)'), findsOneWidget);
   });
 
   testWidgets('estimated + isRouteContext=true → "(geschätzter Zusatzumweg)"', (tester) async {

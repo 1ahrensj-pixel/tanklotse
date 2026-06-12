@@ -10,7 +10,7 @@ import 'distance_label.dart';
 ///   precise + route_via_station   → "(exakter Zusatzumweg)"
 ///   precise + point_to_station    → "(exakte Strecke)"
 ///   estimated + route_via_station → "(geschätzter Zusatzumweg)"
-///   estimated + point_to_station  → "(geschätzte Entfernung)"
+///   estimated + point_to_station  → "(geschätzte Fahrstrecke)"
 class BreakEvenBadge extends StatelessWidget {
   const BreakEvenBadge({
     super.key,

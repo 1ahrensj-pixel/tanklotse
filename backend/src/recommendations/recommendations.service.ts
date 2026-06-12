@@ -212,9 +212,9 @@ export class RecommendationsService {
       );
     }
     return (
-      'Hinweis: Die angezeigte Entfernung ist eine Luftlinien-Schaetzung. ' +
-      'Realer Fahrweg kann groesser sein. Fuer exakte Fahrwege bitte einen ' +
-      'Routing-Provider (Mapbox/GraphHopper) konfigurieren.'
+      'Hinweis: Die Entfernung ist geschaetzt — die Luftlinie wird auf eine ' +
+      'typische Strassen-Fahrstrecke hochgerechnet. Der echte Fahrweg kann ' +
+      'abweichen. Fuer exakte Fahrwege einen Routing-Provider konfigurieren.'
     );
   }
 
@@ -244,6 +244,13 @@ export class RecommendationsService {
     },
   ): Promise<BestStationResult> {
     const fuelKey = input.fuelType.toLowerCase() as 'e5' | 'e10' | 'diesel';
+    // Straßen-Umwegfaktor: Tankerkönigs `dist` und `haversineKm` liefern beide
+    // die LUFTLINIE. Die echte Fahrstrecke ist im Schnitt ~1,3× länger
+    // (Umweg-/Circuity-Index in DE). Solange kein exakter Routing-Provider
+    // konfiguriert ist, rechnen wir die Luftlinie auf eine realistische
+    // Fahrstrecke hoch — sonst wäre „Der Umweg kostet" systematisch zu niedrig
+    // und „Lohnt sich" zu optimistisch.
+    const roadFactor = parsePositiveFloat(process.env.DISTANCE_ROAD_FACTOR, 1.3);
     const candidates = stations
       .map((s) => ({
         station: s,
@@ -316,13 +323,14 @@ export class RecommendationsService {
     // Pre-Sort mit approximativen Werten, damit die wahrscheinlich besten
     // Kandidaten die wenigen Routing-Slots bekommen.
     const scored: Scored[] = candidates.map((c) => {
+      const approxKm = c.distance * roadFactor;
       const r = this.savings.calculate({
         referencePrice,
         targetPrice: c.price,
-        extraDistanceKm: c.distance,
+        extraDistanceKm: approxKm,
         consumptionLPer100Km: input.consumptionLPer100Km,
         tankLiters: input.tankLiters,
-        additionalMinutes: input.hourlyValueEur ? estimateMinutes(c.distance) : undefined,
+        additionalMinutes: input.hourlyValueEur ? estimateMinutes(approxKm) : undefined,
         hourlyValueEur: input.hourlyValueEur,
         dataConfidence: c.station.isOpen ? 'high' : 'low',
       });
@@ -354,7 +362,10 @@ export class RecommendationsService {
 
         const isPrecise =
           routeResult.precise && typeof routeResult.extraDistanceKm === 'number';
-        const extraDistanceKm = isPrecise ? routeResult.extraDistanceKm! : c.distance;
+        // Exaktes Routing → echte Fahrstrecke. Sonst: Luftlinie × Straßenfaktor.
+        const extraDistanceKm = isPrecise
+          ? routeResult.extraDistanceKm!
+          : c.distance * roadFactor;
         const recoMode: DistanceEstimateMode = isPrecise
           ? 'precise_routing'
           : ctx.requestedMode;
@@ -475,6 +486,12 @@ export async function mapWithConcurrency<T, R>(
 function parsePositiveInt(value: string | undefined, fallback: number): number {
   if (value == null) return fallback;
   const n = Number.parseInt(value.trim(), 10);
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
+function parsePositiveFloat(value: string | undefined, fallback: number): number {
+  if (value == null) return fallback;
+  const n = Number.parseFloat(value.trim());
   return Number.isFinite(n) && n > 0 ? n : fallback;
 }
 

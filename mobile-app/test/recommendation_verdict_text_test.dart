@@ -53,7 +53,7 @@ void main() {
     expect(find.textContaining('nicht günstiger'), findsOneWidget);
   });
 
-  testWidgets('Footnote: estimated + point_to_station → Luftlinien-Schätzung', (tester) async {
+  testWidgets('Footnote: estimated + point_to_station → Straßen-Fahrstrecke', (tester) async {
     await tester.pumpWidget(wrap(
       const RecommendationVerdictText(
         tankLiters: 50,
@@ -61,7 +61,7 @@ void main() {
         breakEvenLiters: 12,
       ),
     ),);
-    expect(find.textContaining('Luftlinien-Schätzung'), findsOneWidget);
+    expect(find.textContaining('Straßen-Fahrstrecke'), findsOneWidget);
   });
 
   testWidgets('Footnote: precise + point_to_station → "kein vollständiger Umweg"', (tester) async {

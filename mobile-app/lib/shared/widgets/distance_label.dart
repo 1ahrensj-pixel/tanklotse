@@ -28,7 +28,7 @@ class DistanceLabel {
     if (isPrecise && isRouteContext) return ' (exakter Zusatzumweg)';
     if (isPrecise && !isRouteContext) return ' (exakte Strecke)';
     if (isRouteContext) return ' (geschätzter Zusatzumweg)';
-    return ' (geschätzte Entfernung)';
+    return ' (geschätzte Fahrstrecke)';
   }
 
   /// Voll-Satz fuer Footnotes / Verdict-Texte.
@@ -44,7 +44,7 @@ class DistanceLabel {
       return 'Werte basieren auf einer geschätzten Distanz entlang der Route — '
           'der reale Fahrweg kann abweichen.';
     }
-    return 'Werte basieren auf einer Luftlinien-Schätzung — der reale Fahrweg '
-        'kann abweichen.';
+    return 'Entfernung geschätzt: Luftlinie hochgerechnet auf eine typische '
+        'Straßen-Fahrstrecke (×1,3). Der echte Fahrweg kann abweichen.';
   }
 }
