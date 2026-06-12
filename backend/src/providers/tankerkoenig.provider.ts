@@ -27,9 +27,13 @@ interface TkListResponse {
     lng: number;
     dist: number;
     isOpen: boolean;
+    // Bei sort=dist / type=all liefert Tankerkönig separate Felder ...
     e5?: number | null;
     e10?: number | null;
     diesel?: number | null;
+    // ... bei sort=price + spezifischem type NUR dieses eine Feld (Preis des
+    // angefragten Kraftstoffs). Beides muss gemappt werden.
+    price?: number | null;
   }>;
 }
 
@@ -112,8 +116,11 @@ export class TankerkoenigProvider implements FuelPriceProvider {
     const cached = await this.cache.get<ProviderStation[]>(cacheKey);
     if (cached) return cached;
 
-    const sortParam = params.sort === 'distance' ? 'dist' : 'price';
     const typeParam = params.fuelType === 'ALL' ? 'all' : params.fuelType.toLowerCase();
+    // Tankerkönig verlangt sort=dist, wenn type=all (Preis-Sortierung ist nur
+    // fuer einen konkreten Kraftstoff definiert). Sonst Default sort=price.
+    const sortParam =
+      params.sort === 'distance' || typeParam === 'all' ? 'dist' : 'price';
 
     const data = await this.call<TkListResponse>('/list.php', {
       lat: params.lat,
@@ -128,24 +135,31 @@ export class TankerkoenigProvider implements FuelPriceProvider {
       throw new ServiceUnavailableException(`Tankerkönig: ${data.message ?? 'unbekannter Fehler'}`);
     }
 
-    const stations: ProviderStation[] = data.stations.map((s) => ({
-      id: s.id,
-      name: s.name,
-      brand: s.brand,
-      street: s.street,
-      houseNumber: s.houseNumber ?? null,
-      postCode: String(s.postCode).padStart(5, '0'),
-      place: s.place,
-      lat: Number(s.lat),
-      lng: Number(s.lng),
-      distanceKm: typeof s.dist === 'number' ? s.dist : null,
-      isOpen: Boolean(s.isOpen),
-      prices: {
-        e5: typeof s.e5 === 'number' ? s.e5 : null,
-        e10: typeof s.e10 === 'number' ? s.e10 : null,
-        diesel: typeof s.diesel === 'number' ? s.diesel : null,
-      },
-    }));
+    const stations: ProviderStation[] = data.stations.map((s) => {
+      // Einzel-Preis-Feld (sort=price + spezifischer type) dem angefragten
+      // Kraftstoff zuordnen; separate Felder (sort=dist/all) direkt nutzen.
+      const single = typeof s.price === 'number' ? s.price : null;
+      const ft = params.fuelType;
+      return {
+        id: s.id,
+        name: s.name,
+        brand: s.brand,
+        street: s.street,
+        houseNumber: s.houseNumber ?? null,
+        postCode: String(s.postCode).padStart(5, '0'),
+        place: s.place,
+        lat: Number(s.lat),
+        lng: Number(s.lng),
+        distanceKm: typeof s.dist === 'number' ? s.dist : null,
+        isOpen: Boolean(s.isOpen),
+        prices: {
+          e5: typeof s.e5 === 'number' ? s.e5 : ft === 'E5' ? single : null,
+          e10: typeof s.e10 === 'number' ? s.e10 : ft === 'E10' ? single : null,
+          diesel:
+            typeof s.diesel === 'number' ? s.diesel : ft === 'DIESEL' ? single : null,
+        },
+      };
+    });
 
     // Persistenz Stammdaten + aktuelle Preise (Cache-Tabelle)
     await this.persistStationsAndPrices(stations);

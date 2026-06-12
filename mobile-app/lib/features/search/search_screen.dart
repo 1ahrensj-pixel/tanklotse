@@ -277,6 +277,33 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               ],
             ],
             if (_stations.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              Text(
+                '${_stations.length} Tankstellen gefunden',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              ..._stations.map((s) {
+                final price = s.prices.forFuel(prefs.fuelType);
+                return Card(
+                  child: ListTile(
+                    title: Text('${s.brand} · ${s.name}'),
+                    subtitle: Text(
+                      '${s.address.formatted()}\n'
+                      '${s.distanceKm?.toStringAsFixed(1) ?? '?'} km · '
+                      '${s.isOpen ? 'geöffnet' : 'geschlossen'}',
+                    ),
+                    isThreeLine: true,
+                    trailing: Text(
+                      price != null
+                          ? '${price.toStringAsFixed(3).replaceAll('.', ',')} €'
+                          : '–',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () => context.push('/station/${s.id}'),
+                  ),
+                );
+              }),
               const SizedBox(height: 12),
               Text('Datenquelle: $_attribution', style: const TextStyle(fontSize: 11)),
             ],
