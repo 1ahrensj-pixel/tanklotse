@@ -12,6 +12,9 @@ ARG NEXT_PUBLIC_SUPPORT_EMAIL
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 ENV NEXT_PUBLIC_SUPPORT_EMAIL=$NEXT_PUBLIC_SUPPORT_EMAIL
 COPY --from=deps /app/node_modules ./node_modules
+# CACHEBUST erzwingt frische Source-COPY + Build (Render reused sonst einen
+# veralteten Layer trotz clearCache → alte Homepage wurde ausgeliefert).
+ARG CACHEBUST=2026-06-12-homepage-fix
 COPY . .
 RUN npm run build
 
