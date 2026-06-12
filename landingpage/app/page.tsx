@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: 'Was unterscheidet TankLotse von anderen Spritpreis-Apps?',
-    a: 'Andere Apps zeigen den billigsten Literpreis. TankLotse rechnet aus, was nach Abzug der Umweg-Kosten wirklich übrig bleibt — inklusive deines Verbrauchs und deiner Tankmenge. Manchmal lohnt sich die billigere Tankstelle nämlich nicht.',
+    a: 'Die meisten Apps zeigen nur den billigsten Literpreis. TankLotse rechnet dir transparent vor, was nach Abzug der Umweg-Kosten wirklich übrig bleibt — mit echter Fahrstrecke, deinem Verbrauch, deiner Tankmenge und offener Rechnung samt Break-even-Litern. Gratis, ohne Werbung, ohne Abo. Manchmal lohnt sich die billigere Tankstelle nämlich nicht.',
   },
   {
     q: 'Was passiert mit meinen Standortdaten?',

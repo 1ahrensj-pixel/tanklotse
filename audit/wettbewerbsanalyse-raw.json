@@ -1,0 +1,490 @@
+{
+  "wettbewerber": [
+    {
+      "name": "Clever Tanken (clever-tanken.de)",
+      "betreiber": "infoRoad GmbH (Marke clever-tanken.de, am Markt seit 1999, App seit 2009/2010)",
+      "plattformen": [
+        "Android",
+        "iOS (inkl. Apple CarPlay)",
+        "Web (clever-tanken.de)"
+      ],
+      "webUrl": "https://www.clever-tanken.de",
+      "hatWebVersion": true,
+      "bewertungPlay": "ca. 4,4 (ca. 300k Bewertungen; 10+ Mio. Downloads; Quelle: FoxData/AppBrain-Aggregat, Play-Store-Seite selbst nicht direkt abrufbar)",
+      "bewertungAppStore": "4,6 (ca. 224.000 Bewertungen, deutscher App Store, Stand Juni 2026)",
+      "datenquelle": "MTS-K direkt: clever-tanken.de ist beim Bundeskartellamt als zugelassener Verbraucher-Informationsdienst registriert und erhält E5/E10/Diesel-Preise unverändert über die offizielle MTS-K-Schnittstelle (laut eigener FAQ dürfen MTS-K-Meldungen nicht verändert werden und sind markiert). Kein Tankerkönig-Umweg. Zusätzliche Sorten ohne MTS-K-Meldepflicht (Superplus, Premium-Diesel, LPG, CNG, AdBlue) kommen aus eigenen Nutzer-Preismeldungen in der App.",
+      "kernfunktionen": [
+        "Spritpreisvergleich nach Ort/Umkreis mit Sortierung nach Preis oder Entfernung",
+        "Magic Map (Kartenansicht mit günstigsten Tankstellen)",
+        "Preisalarm per Push-Benachrichtigung bei Wunschpreis",
+        "Favoriten-Tankstellen mit Preisüberwachung",
+        "Preisverlauf/Preishistorie (letzter Monat) und Tipps zur Preisentwicklung",
+        "Breiteste Sortenabdeckung: E5, E10, Diesel plus Superplus, Premium-Sorten, LPG, CNG, AdBlue (per Nutzermeldung)",
+        "clever-deal: Partner-Tankstellen (z.B. HEM) matchen den günstigsten Preis im Umfeld",
+        "clever pay: mobiles Bezahlen direkt an der Zapfsäule",
+        "clever-laden: E-Ladesäulen mit Live-Verfügbarkeit, Steckertypen, Ladeleistung, Start/Stopp des Ladevorgangs in der App",
+        "Fahrzeugprofil (filtert relevante Ladesäulen/Kraftstoffe automatisch)",
+        "Apple CarPlay-Unterstützung",
+        "News-Bereich (Inhalte von Auto Bild)"
+      ],
+      "monetarisierung": "Kostenlos mit Werbung (werbefinanziert). In-App-Abo \"clever-tanken Werbefrei\" für 3,99 EUR/Jahr (früher 1,99 EUR) — clever-deal-Partnerangebote bleiben aber auch dort sichtbar (= bezahlte Partner-Promotions als zweite Erlösquelle). Dazu Bezahl-/Ladefunktionen (clever pay, clever-laden) mit Partnern; eine Provisionsbeteiligung liegt nahe, ist aber nicht offiziell belegt (unbekannt).",
+      "staerken": [
+        "Geschwindigkeit und Einfachheit als Kern-Lob: 'Kurz öffnen, Preis checken, fertig' — funktioniert komplett ohne Registrierung, Konto oder Zahlungsdaten; Nutzer loben 'schnell, aktuell und übersichtlich' (App-Store-Rezensionen, Check-App-Analyse 01/2026)",
+        "Größte Kraftstoff-Abdeckung am Markt: komplette MTS-K-Daten plus Superplus, Premium-Diesel, LPG, CNG, AdBlue über Community-Meldungen — Sorten, die viele Konkurrenten nicht haben",
+        "Preisalarm und Favoritenliste werden in Rezensionen und Tests als praktischste Features hervorgehoben; mehrfacher Testsieger (Computer Bild, Auto Bild, Capital); R+V- und Kroschke-Vergleiche: Bestnoten für Übersichtlichkeit",
+        "Datensendeverhalten von Stiftung Warentest als 'unkritisch' eingestuft (sendet nur funktionsnotwendige Daten) — bester Wert unter den getesteten Spritpreis-Apps",
+        "Vertrauensvorsprung als Original seit 1999 mit 10+ Mio. Downloads und stabil hoher Bewertung trotz täglicher Massennutzung"
+      ],
+      "schwaechen": [
+        "Werbung ist Beschwerdepunkt Nr. 1: Nutzer klagen, dass Werbeplatzierungen 'die Übersicht zerstören' und genau die Tankstellen-Infos überdecken, die man schnell braucht (Kuketz-Blog-Auswertung der Store-Reviews)",
+        "Preisaktualität: wiederkehrende 1-Stern-Kritik, dass Preise an der Säule mehrere Cent höher sind als in der App ('Wenn die Preise nicht aktuell sind, kann ich mir die App sparen') — App kann MTS-K-Verzögerung nicht ausgleichen",
+        "Performance-Einbrüche nach Updates ('seit dem letzten Update lädt die App ewig') und Server-Überlastung zu Stoßzeiten (App-Store- und Play-Store-Rezensionen)",
+        "Datenschutz/Tracking: Kuketz-Analyse fand 9 Tracker in der Android-App (u.a. Facebook, Firebase Analytics); Consent-Banner erfüllt Basisanforderungen von DSGVO/TTDSG nicht, Drittverbindungen starten schon beim Laden des Banners",
+        "Kleinere wiederkehrende Review-Kritik: Favoriten gehen bei Neuinstallation verloren (keine Cloud-Sync), fehlende Statistik-/Preistrend-Funktionen, Support reagiert wenig auf Feature-Vorschläge"
+      ],
+      "hatLohntSichCheck": false,
+      "besonderheiten": [
+        "KRITISCHE LÜCKE (streng geprüft): Kein echter Lohnt-sich-Check. Weder die offizielle FAQ noch die App-Store-Beschreibung dokumentieren eine Umwegkosten-, Break-even- oder Real-Ersparnis-Berechnung. Ein Drittanbieter-Blog (outdoormonster.de) erwähnt eine 'Preis pro Tankfüllung'-Anzeige ('zeigt, ob sich der Extraweg wirklich auszahlt'), beschreibt aber kein Rechenverfahren — sie rechnet erkennbar nur Literpreis x Tankmenge in eine Gesamtersparnis um, ohne Umweg-Kilometer, Anfahrt-Spritverbrauch oder Break-even-Liter einzubeziehen. Einen dedizierten Umwegrechner ('Lohnt sich der Umweg?') bietet ausgerechnet der Konkurrent tanken.de auf seiner Website — bei Clever Tanken gibt es nur Sortierung nach Preis/Entfernung. Das ist eine konkrete Differenzierungschance.",
+        "Pionier-/Marktführer-Position: 'das Original seit 1999' (älter als die MTS-K selbst), 10+ Mio. Downloads, ca. 63k Neu-Downloads/30 Tage (AppMonsta/AppBrain-Daten)",
+        "clever-deal als ungewöhnliches Modell: Partner-Tankstellen (z.B. HEM-Tiefpreisgarantie) passen ihren Literpreis automatisch dem günstigsten Umfeld-Preis an — Monetarisierung, die für Nutzer wie ein Feature wirkt",
+        "E-Mobilität integriert (clever-laden mit Live-Verfügbarkeit und Ladevorgang-Start/Stopp) — ein Blog behauptet allerdings eine Einstellung des Dienstes; die aktuelle App-Store-Beschreibung (Juni 2026) listet ihn weiterhin: Status widersprüchlich/unbekannt",
+        "Nur Deutschland: keine Auslandspreise — wiederkehrender Kritikpunkt für Grenzregionen und Urlaubsfahrten",
+        "Letzte Updates: v8.1.4 (01/2026), v8.2.0 (02/2026) — aktiv gepflegt"
+      ]
+    },
+    {
+      "name": "ADAC Drive (ehem. ADAC Spritpreise)",
+      "betreiber": "ADAC e.V., München (technische Basis ursprünglich PTV-Gruppe, Paket-ID com.ptvag.android.adacgasprices)",
+      "plattformen": [
+        "iOS (App Store)",
+        "Android (Google Play)",
+        "Apple CarPlay",
+        "Android Auto",
+        "Web (Kraftstoffpreis-Suche auf adac.de)"
+      ],
+      "webUrl": "https://www.adac.de/services/apps/drive/ (App-Seite); https://www.adac.de/verkehr/tanken-kraftstoff-antrieb/kraftstoffpreise/ (Web-Preissuche)",
+      "hatWebVersion": true,
+      "kernfunktionen": [
+        "Spritpreisvergleich in Echtzeit (Super E10, Super, Diesel, HVO100, Erdgas/CNG) für >14.000 Tankstellen in Deutschland",
+        "Preis-Historie (Charts 24h / 7 Tage) und 'Tanken-Prognose' mit Empfehlung des idealen Tankzeitpunkts",
+        "Tankstellen/Ladesäulen entlang der Route suchen und als Zwischenziel einfügen",
+        "Turn-by-Turn-Navigation mit Echtzeit-Verkehr, Eco-Routen, Maut-/Vignetten-Infos, Routing für Auto/Wohnmobil/Motorrad/Fahrrad",
+        "E-Auto-Laden: >120.000 Ladestationen / 360.000 Ladepunkte europaweit",
+        "Auslandsspritpreise (AT, IT, ES, FR, SI, UK)",
+        "Extras: Parken, Camping-/Stellplätze (~25.000), Wetter, Notfallpass, digitale ADAC-Clubkarte"
+      ],
+      "staerken": [
+        "Preise direkt auf der Karte, aktuell und übersichtlich — von Nutzern explizit gelobt ('Immer aktuell und sehr übersichtlich', 'Gut ist, dass die Preise gleich in der Karte angezeigt werden')",
+        "Preis-Historie + Tanken-Prognose gelten in Tests (iphone-ticker, it-blogger, Netzwelt) als echter Mehrwert zum reinen Preisvergleich; Netzwelt gibt 'klare Download-Empfehlung'",
+        "Kostenlos und ohne Werbebanner; mobilsicher-AppCheck attestiert nur geringes Datenschutzrisiko (kaum Datenabfluss an Dritte)",
+        "Große Funktionsbreite als All-in-one-App (Tanken + Laden + Navigation + Camping) inkl. CarPlay/Android Auto — Forennutzer loben u.a. realistische Fahrzeit-Kalkulation für Wohnwagen-Gespanne",
+        "Hohe Reichweite und Vertrauen der ADAC-Marke (5,6 Mio. Play-Downloads, ~245.000 App-Store-Bewertungen, lt. ADAC ~200.000 täglich aktive Nutzer)"
+      ],
+      "schwaechen": [
+        "Redesign/Umbenennung zu 'ADAC Drive' (2024) löste massive Nutzerkritik aus: 'eine Katastrophe', versteckte Menüs, 1-2-Sterne-Welle; Play-Store-Note sackte auf ~2,8-3,2 ab",
+        "Verschlechterte Tankstellen-Liste: es werden nur Tankstellen im sichtbaren Kartenausschnitt gezeigt, die alte Radius-Listenansicht (z.B. alle Tankstellen im 10-15-km-Umkreis) fehlt — wiederkehrende Beschwerde in App-Store-Reviews",
+        "Navigations-Mängel: zeitweise keine Sprachansagen, spontane stumme Routen-Neuberechnungen, fehlende Spurführung; Wohnmobil-Routing ignorierte in Forenberichten Gewichtslimits (3,5-t-Brücke trotz eingetragener 4,3 t)",
+        "Login-Zwang seit Version 6.0 (kostenloses ADAC-Konto nötig) verärgert Nutzer, die nur schnell Preise sehen wollen",
+        "Diverse Bugs in Reviews/Foren: Abstürze, Komma-Eingabe bei Gespann-Maßen nicht möglich, gespeicherte Routen behalten nur Start/Ziel statt der gewählten Strecke, Karten-Zoom wird beim Schließen nicht gemerkt"
+      ],
+      "hatLohntSichCheck": false,
+      "bewertungPlay": "ca. 3,2 (ca. 31.000 Bewertungen; 5,6 Mio. Downloads, Stand Anfang 2026 lt. AppBrain — Netzwelt-Snapshot zeigte zwischenzeitlich 2,8)",
+      "bewertungAppStore": "4,5 (ca. 245.000 Bewertungen, Stand Mitte 2026)",
+      "datenquelle": "MTS-K direkt: Der ADAC ist seit dem Probebetrieb der Markttransparenzstelle für Kraftstoffe (September 2013) einer der ersten vom Bundeskartellamt zugelassenen Verbraucherinformationsdienste; kein Umweg über Tankerkönig. Auslandspreise aus weiteren (nationalen) Quellen; ADAC nennt die Quelle auf der eigenen Produktseite nicht explizit.",
+      "monetarisierung": "Komplett kostenlos, ohne Werbebanner und ohne In-App-Käufe; dient dem ADAC e.V. als Mitglieder-Bindungs- und Marketinginstrument (Cross-Promotion Vorteilswelt, Clubkarte); einzelne Zusatzfunktionen (z.B. individualisiertes Wohnmobil-Routing nach Maßen/Gewicht, Vorteilswelt) sind ADAC-Mitgliedern vorbehalten. Seit v6.0 kostenloses ADAC-Konto erforderlich.",
+      "besonderheiten": [
+        "KEIN Umweg-Lohnt-sich-Check: Weder Feature-Liste, Store-Beschreibungen noch Tests/Reviews erwähnen eine Berechnung von Umweg-Spritkosten, Break-even oder realer Netto-Ersparnis. Die App bietet nur Preisvergleich/Karte, Tankstellen entlang der Route als Zwischenziel, Preis-Historie und Tankzeitpunkt-Prognose. Die Umweg-Rechnung (Faustregel: Ersparnis vs. ~0,14 EUR/km Fahrkosten) publiziert der ADAC nur REDAKTIONELL auf adac.de bzw. in Pressemeldungen — nicht als App-Funktion.",
+        "2024 Rebrand von 'ADAC Spritpreise' zu 'ADAC Drive' (All-in-one-Mobility-App) — strategischer Schwenk zu Navigation+Laden+Reise, erkauft mit deutlichem Bewertungseinbruch im Play Store (iOS-Altbewertungen blieben bei 4,5)",
+        "Alleinstellungsmerkmale: Tanken-Prognose/Preis-Historie, HVO100-Preise (DE/AT), Auslandspreise in 6 Ländern, Wohnmobil-/Gespann-Routing, Notfallpass",
+        "Diskrepanz iOS (4,5) vs. Android (ca. 3,2) deutet darauf hin, dass die Android-Community den Relaunch deutlich stärker abstraft",
+        "Mobilsicher-AppCheck: datenschutzfreundlich, nur minimale Daten an Dritte — ungewöhnlich gut für eine Gratis-App mit dieser Reichweite",
+        "Updates Feb/Mai 2026: u.a. neues Navigations-Design, Parkplätze und Wetter (Quellen: MacGadget, appgefahren)"
+      ]
+    },
+    {
+      "name": "mehr-tanken",
+      "betreiber": "Motor Presse Stuttgart GmbH & Co. KG (Leuschnerstr. 1, 70174 Stuttgart)",
+      "plattformen": [
+        "iOS (App Store, inkl. CarPlay-Unterstützung für Ladesäulen)",
+        "Android (Google Play)",
+        "Web (mehr-tanken.de mit Tankstellensuche, Filter nach Marke/Sorte/Umkreis)"
+      ],
+      "webUrl": "https://www.mehr-tanken.de",
+      "hatWebVersion": true,
+      "bewertungPlay": "4,5 (ca. 304.000 Rezensionen, 5 Mio.+ Downloads)",
+      "bewertungAppStore": "4,6 (ca. 353.000 Bewertungen)",
+      "datenquelle": "MTS-K direkt: mehr-tanken ist beim Bundeskartellamt als offizieller Verbraucher-Informationsdienst der Markttransparenzstelle für Kraftstoffe gelistet und bezieht die Preisdaten direkt von der MTS-K. Zusätzlich können Nutzer fehlerhafte Preise/Angaben pro Tankstelle melden (Korrektur-Community). Kein Tankerkönig-Bezug; vor MTS-K-Einführung (bis 2013) war die App rein community-basiert.",
+      "kernfunktionen": [
+        "Live-Spritpreisvergleich für >14.000 Tankstellen (Diesel, E5, E10, Premium-Sorten, Erdgas, Wasserstoff), Karten- und Listenansicht",
+        "Flizzi-Tankzeitpunkt-Empfehlung mit Benzinpreisprognose für Region und Spritsorte (steigende/fallende Preise)",
+        "Flizzi-Tankstellen-Empfehlung: optimale Tankstelle abhängig von Verbrauch, Tankvolumen und Entfernung (Plus-Abo)",
+        "Preisalarm per Push-Benachrichtigung (Plus-Abo)",
+        "Routenplaner: günstigste Tankstellen entlang einer Route (Plus-Abo)",
+        "E-Mobilität: >30.000 Ladesäulen, Ladetarif-Vergleich, Umschalter Tankstelle/Ladesäule",
+        "Verbrauchsrechner und Fehler-Melden-Funktion pro Tankstelle"
+      ],
+      "staerken": [
+        "Preisprognose/Tagespreistrend wird in Rezensionen explizit als sehr hilfreich gelobt — Alleinstellungsmerkmal gegenüber reinen Preislisten-Apps",
+        "Übersichtliches Design und schnelle Preisanzeige: Nutzerzitate wie 'Übersichtlich gestaltet, und die Preise sind meist richtig', 'Preise werden schnell angezeigt', 'Immer aktuell und übersichtlich'",
+        "Sehr hohe Store-Bewertungen (4,5/4,6 bei zusammen >650.000 Bewertungen) plus externe Testsiege: beste Tank-App laut F.A.Z.-Institut (2022), FOCUS-MONEY-Testsieger (2023), SZ-Institut Top Mobile Apps 2025 ('Sehr hoher Mehrwert')",
+        "Breite Funktionsabdeckung inkl. E-Mobilität (Ladesäulen + Ladetarif-Vergleich), was klassische Tank-Apps oft nicht bieten"
+      ],
+      "schwaechen": [
+        "Stabilität: Nutzer berichten über monatelange Bugs und Einfrieren auf dem Lade-/Startbildschirm ('great app when it works, but for the past several months it has continually been buggy and often freezes on the starting load page') sowie Abstürze beim Antippen von Tankstellen auf der Karte",
+        "Fehlermeldung 'Internetverbindung erforderlich' trotz aktivem 4G/WLAN; wiederkehrende Server-/Backend-Ausfälle, bei denen keine Tankstellen mehr gefunden werden (dokumentiert u.a. im ComputerBase-Forum und auf Netzwelt-Störungsseite)",
+        "Werbung in der Gratis-Version wird als aufdringlich empfunden; zentrale Funktionen (Preisalarm, Routenplaner, Flizzi-Tankzeitpunkt und Umweg-/Tankstellen-Empfehlung) sind hinter dem Plus-Abo gesperrt",
+        "Datenschutz: App-Store-Label weist Tracking über Apps hinweg aus (genauer Standort, Suchverlauf, Nutzer-/Geräte-IDs, Nutzungsdaten); bereits im Stiftung-Warentest-Datenschutztest (2014) als 'kritisch' eingestuft, weil mehr Daten als nötig an Dritt-Server gesendet wurden"
+      ],
+      "hatLohntSichCheck": true,
+      "monetarisierung": "Freemium: Gratis-Version mit Werbung und Werbetracking; Abo \"mehr-tanken+\" (auch als PUR beworben) für 0,99 €/Monat oder 4,99 €/Jahr — werbefrei, ohne Werbetracking, schnellere Ladezeiten und Premium-Funktionen (Preisalarm, Routenplaner, Flizzi-Tankzeitpunkt, optimale-Tankstelle-/Umweg-Empfehlung, Lademöglichkeiten entlang Route). Keine Payment-/Tank-Provision bekannt. Zusätzlich Vermarktung als Werbeträger über MPS-Vermarktung (Motor Presse).",
+      "besonderheiten": [
+        "Beleg zum Lohnt-sich-Check (streng geprüft): Offizielle Website wörtlich: 'Flizzi empfiehlt dir die optimale Tankstelle in Abhängigkeit zu deinem Verbrauch, Tankvolumen und deiner Entfernung zur Tankstelle' und App-Beschreibung: 'So erfährst du, ob sich ein Umweg für einen günstigeren Preis lohnt (aktives Plus-Abo benötigt)'. Da Verbrauch + Tankvolumen + Entfernung einfließen, ist das eine echte Umweg-Wirtschaftlichkeitsrechnung und nicht nur Entfernungssortierung — ABER: nur im Plus-Abo, und eine transparente Anzeige von Umwegkosten in Euro, Break-even-Litern oder realer Ersparnis ist nirgends dokumentiert (Black-Box-Empfehlung durch Maskottchen 'Flizzi'). Angriffsfläche für einen transparenten Lohnt-sich-Rechner.",
+        "Offizieller MTS-K-Partner (direkt beim Bundeskartellamt gelistet) — Datenqualität auf Niveau der Konkurrenz, kein Zwischenhändler wie Tankerkönig",
+        "Eine der ältesten deutschen Tank-Apps (seit 2010, App-Store-ID 395965464), starke Markenreichweite über Motor-Presse-Titel (auto motor und sport etc.)",
+        "Preisprognose-/Tankzeitpunkt-Feature ist der meistgelobte Differenziator in Nutzer-Reviews",
+        "Zweigleisig Verbrenner + E-Auto (Ladesäulen, Ladetarife) — Positionierung als App für beide Antriebswelten",
+        "Sehr günstiges Abo (4,99 €/Jahr) im Vergleich zu typischen Premium-Apps — Monetarisierung primär über Werbung in der Gratis-Version"
+      ]
+    },
+    {
+      "name": "Bertha – Deine Tank-App (Mercedes-Benz/Daimler) — ACHTUNG: zum 31.07.2022 eingestellt, Mitte 2026 nicht mehr am Markt",
+      "betreiber": "Mercedes-Benz AG (ursprünglich Daimler AG; im Store zeitweise als Mercedes-Benz Connectivity Service GmbH geführt)",
+      "plattformen": [
+        "iOS (mit Apple CarPlay)",
+        "Android (mit Android Auto)",
+        "Märkte: Deutschland, Österreich, Schweiz"
+      ],
+      "webUrl": "https://www.bertha.app/",
+      "hatWebVersion": false,
+      "kernfunktionen": [
+        "Spritpreisvergleich in Ampelfarben (grün/gelb/rot) auf Kartenansicht – in der Nähe oder am Wunschort",
+        "Abdeckung: ca. 15.000 meldepflichtige Tankstellen in DE, ca. 3.000 in AT, zusätzlich CH – inkl. freier Tankstellen",
+        "Zeitstempel + Aktualisierungsfunktion: zeigt, wann die Tankstelle zuletzt den Preis geändert hat",
+        "Preisverlaufsanzeige: Tageskurve heute vs. gleicher Wochentag der Vorwoche ('jetzt tanken oder warten?')",
+        "Filter: Spritsorten, Marken, Öffnungszeiten, Favoriten, Tankkarten, Bertha-Pay-Stationen",
+        "Routenplanung: Tankstellen entlang der Route; Übergabe an Apple/Google Maps als Zwischenstopp",
+        "Bertha Pay (ab 29.08.2019): kontaktlos vom Auto aus per App bezahlen, ohne Extrakosten, digitale Rechnung per E-Mail; Visa/Mastercard über Mercedes Pay; Start mit ca. 400 Stationen (v.a. HEM), später u.a. Aral, Shell, Tamoil, LTG, Pinoil"
+      ],
+      "bewertungPlay": "ca. 4,4 Sterne, über 500.000 Downloads (genaue Anzahl Bewertungen unbekannt; App seit 31.07.2022 aus dem Play Store entfernt)",
+      "bewertungAppStore": "ca. 4,4 von 5 (laut JustUseApp-Archivdaten; genaue Anzahl unbekannt; App seit 31.07.2022 aus dem App Store entfernt)",
+      "staerken": [
+        "Design/UX: von Nutzern und Fachpresse als eine der besten Tank-Apps in Funktionalität und Design gelobt – aufgeräumte, intuitive Ampel-Kartendarstellung mit großen Preisanzeigen; Gewinner des 'Car Connectivity Award' der auto motor und sport-Leser (beste Smartphone-App)",
+        "Komplett kostenlos, werbefrei UND ohne Registrierungszwang nutzbar – genau das vermissten Nutzer später bei der empfohlenen Alternative ryd (appgefahren: 'meine liebste Tank-App')",
+        "Bertha Pay wurde als sehr bequem gelobt: Bezahlen ohne Auszusteigen, digitale Rechnung per E-Mail, keine Transaktionskosten; zeitweise großzügige Rabattaktionen (z.B. 8 Cent/Liter)",
+        "Preisverlaufsgrafik (heute vs. Vorwoche) als geschätztes Alleinstellungsmerkmal für die Frage 'jetzt tanken oder warten'",
+        "Markenoffen: trotz Mercedes-Absender für Fahrer aller Marken nutzbar, inkl. CarPlay/Android-Auto-Integration"
+      ],
+      "schwaechen": [
+        "Falsche/veraltete Preisdaten: Ein Nutzer berichtete, Bertha habe ihn 5-mal in Folge zu Tankstellen geführt, wo der Preis real fast 10 Cent über der App-Anzeige lag",
+        "Lückenhafte Abdeckung: Nutzer bemängelten, dass Markentankstellen (Esso, Jet, Shell) in unmittelbarer Nähe fehlten; teils wurde keine Tankstelle angezeigt, obwohl man direkt davor stand",
+        "Bertha-Pay-Probleme (Motor-Talk): beworbener 8-Cent-Rabatt funktionierte nicht, Serverprobleme beim Bezahlvorgang, Zahlung über die Fahrzeug-Headunit schlug teils fehl (nur in der App möglich)",
+        "Keine Listendarstellung der Tankstellen – nur Kartenansicht; von Testern (appgefahren) als Lücke gegenüber Konkurrenz-Apps kritisiert",
+        "Abrupte Einstellung zum 31.07.2022 ohne klare Begründung ('Bertha's Reise findet ihr Ende') – Funktionen nur noch für Mercedes-Kunden in Mercedes me ('Fuel & Pay'); Vertrauensverlust bei treuen Nutzern"
+      ],
+      "hatLohntSichCheck": false,
+      "datenquelle": "Deutschland: Preisdaten der ca. 15.000 meldepflichtigen Tankstellen, d.h. MTS-K-Daten (Markttransparenzstelle für Kraftstoffe beim Bundeskartellamt); ob Bertha direkt als zugelassener Verbraucherinformationsdienst registriert war oder die Daten über einen Dienstleister (z.B. Tankerkönig) bezog, ist nicht öffentlich belegt – unbekannt. Österreich (ca. 3.000 Tankstellen) und Schweiz: konkrete Quelle (z.B. E-Control/Spritpreisrechner) nicht belegt – unbekannt.",
+      "monetarisierung": "Komplett kostenlos und werbefrei, kein Premium-Abo; Bertha Pay ohne Extrakosten/Transaktionsgebühren für Nutzer. Ein Erlösmodell (z.B. Payment-Provision) wurde nie offengelegt – laut Mercedes war die App ein konzernfinanziertes Pilotprojekt ('Testumgebung für neue Services'), nie als dauerhaftes Produkt geplant.",
+      "besonderheiten": [
+        "WICHTIG FÜR DIE WETTBEWERBSANALYSE: Bertha ist seit 31.07.2022 offline und Mitte 2026 KEIN aktiver Wettbewerber mehr – nur als historische Referenz/Featurevorbild relevant. Nachfolger: 'Fuel & Pay' in Mercedes me (nur Mercedes-Kunden, via MBUX/App) und ryd (markenoffen, Mercedes ist strategischer Partner/Investor; Registrierung erforderlich)",
+        "Kein Lohnt-sich-Check (streng geprüft): Weder offizielle Featurelisten noch Testberichte (ComputerBase 2018, appgefahren 2018/2020, iphone-ticker) erwähnen eine Umwegkosten-/Break-even-Berechnung. Es gab nur Preis-Sortierung/Ampelfarben nach Entfernung und die zeitliche Preisverlaufsanzeige ('jetzt tanken oder warten') – Letztere ist ein Timing-Check, kein Umweg-Wirtschaftlichkeits-Check",
+        "Benannt nach Bertha Benz; seltener Fall einer markenoffenen OEM-App (Daimler) – über 500.000 Play-Store-Downloads, laut auto motor und sport eine der erfolgreichsten Apps des Konzerns",
+        "Indirekte Nachfolge-Apps aus der Community: 'tankste!' wurde explizit als minimalistischer Bertha-Ersatz entwickelt (appgefahren) – Hinweis darauf, dass Berthas UX-Konzept (Ampel-Karte, werbefrei, ohne Registrierung) eine Marktlücke hinterließ",
+        "Lehre für eigenes Produkt: Berthas meistgelobte Eigenschaften (werbefrei, kein Login, Ampel-UI, Preisverlauf) und meistkritisierte Punkte (Preisdaten-Genauigkeit, fehlende Stationen, unzuverlässige Pay-Rabatte) markieren genau die Hebel, an denen eine neue Tank-App ansetzen kann",
+        "Quellen: bertha.app, appgefahren.de (321075, 233902, 254237, 323819), iphone-ticker.de (193758, 152608), auto-motor-und-sport.de (mercedes-stoppt-tank-app-bertha), sprit-plus.de (Bertha Pay, 29.08.2019), computerbase.de (2018-06), motor-talk.de (t6906455, t7037530), justuseapp.com (1427658183), bundeskartellamt.de (MTS-K)"
+      ]
+    },
+    {
+      "name": "TankenApp (offiziell: \"TankenApp mit Benzinpreistrend\", ehem. t-online/Telekom)",
+      "betreiber": "Ströer Media Brands GmbH (im Apple App Store: Stroeer Publishing Hub GmbH, Berlin). Ursprünglich 2013 von Telekom/t-online.de gestartet (Android-Package heißt noch de.telekom.tanken), nach Ströer-Übernahme der t-online-Marke von Ströer weitergeführt.",
+      "plattformen": [
+        "Android (Google Play, 1 Mio.+ Downloads, letztes Update 26.01.2026, v3.3.7)",
+        "iOS (App Store)",
+        "Web (tanken.t-online.de)"
+      ],
+      "hatWebVersion": true,
+      "webUrl": "https://tanken.t-online.de/",
+      "bewertungPlay": "4,3 (33.849 Bewertungen; exakt 4,28 — direkt aus Play-Store-Seitendaten extrahiert, Stand Juni 2026)",
+      "bewertungAppStore": "4,5 (47.091 Bewertungen, Stand Juni 2026)",
+      "kernfunktionen": [
+        "Spritpreisvergleich für alle meldepflichtigen Tankstellen Deutschlands, >200.000 Preisaktualisierungen täglich",
+        "9 Spritsorten: Diesel, Super E5, E10, Super Plus, Diesel Plus, Lkw-Diesel, Biodiesel, Autogas, Erdgas",
+        "12-Stunden-Benzinpreis-Prognose mit Tankzeitfenster-Empfehlung (z.B. 'Preise fallen, tanke zwischen 16 und 21 Uhr') — historisches Alleinstellungsmerkmal",
+        "Ein-Klick-Filter: günstigste Tankstelle, nächste Tankstelle oder 'Best deal'",
+        "Anzeige der Ersparnis in Euro pro Tankvorgang (Preisdifferenz zwischen Tankstellen)",
+        "Favoriten und Routen mit allen zugehörigen Tankstellen entlang der Strecke",
+        "Tankstellen-Details (Öffnungszeiten, Adresse, berechnete Fahrzeit) + Navigation",
+        "Preisalarm (beworben; nach App-Redesign laut Rezensionen zeitweise entfernt/angekündigt)",
+        "Dark Mode"
+      ],
+      "monetarisierung": "Kostenlos mit Werbung (auch Video-Werbung); werbefreies Premium-Abo per In-App-Kauf: 0,59 €/Monat, 1,99 €/6 Monate, 2,99 €/Jahr — Premium entfernt nur die Werbung, keine Zusatzfunktionen. Keine Bezahlfunktion an der Zapfsäule (keine Payment-Provision).",
+      "datenquelle": "MTS-K (amtliche Echtzeitdaten der Markttransparenzstelle für Kraftstoffe beim Bundeskartellamt). Die TankenApp arbeitete laut teltarif seit MTS-K-Start 2013 als Verbraucherinformationsdienst direkt mit der Meldestelle zusammen; Rally-Branchenblog (2026) bestätigt MTS-K-Livedaten. Anmerkung: In der aktuell abrufbaren BKartA-VID-Liste taucht 'TankenApp'/'Ströer' nicht namentlich auf, wohl aber der Ströer-Schwesterdienst 'Mehr-Tanken' — die Zulassung läuft offenbar über den Konzern. Kein Hinweis auf Tankerkönig oder eigene Preismeldungen.",
+      "staerken": [
+        "12h-Preisprognose mit konkretem Tankzeitfenster wird als Alleinstellungsmerkmal gelobt ('als einzige App eine Prognose, wann die beste Zeit zum Tanken ist'); App war connect-Testsieger",
+        "Schnelle, unkomplizierte Bedienung — App-Store-Rezensionen: 'Schnell und übersichtlich', 'Problemlose App'; Tests loben 'unkomplizierte Bedienung'",
+        "Ersparnis-Anzeige kommt bei Teilen der Nutzer gut an — Rezension (via Netzwelt): 'Die Funktion der Anzeige der Ersparnis bei den verschiedenen Tankstellenpreisen gefällt mir sehr gut'",
+        "Sehr breite Spritsorten-Abdeckung inkl. Autogas, Erdgas, Lkw-Diesel und Biodiesel — mehr als viele Wettbewerber",
+        "Routenfunktion: günstige Tankstellen entlang einer gespeicherten Strecke, nützlich für Pendler"
+      ],
+      "schwaechen": [
+        "Aggressive Werbung in der Gratis-Version — Play-Rezension 2025/26: 'seit letzter Zeit aggressive Werbung TikTok und Temu, die man fast nicht schließen kann'; App-Store 2025: 'Mittlerweile leider mit sehr viel Werbung, die nicht gerade dezent ist'; Video-Ads laut Nutzern lange nicht überspringbar",
+        "Preisgenauigkeit/Datenaktualität: 'sehr oft stimmt der Preis nicht. Das ist aber entscheidend'; 'vormittags werden nur mehr Daten vom Vortag angezeigt'; ein Nutzer: man nimmt 'einen Umweg zur vermeintlich günstigeren Tanke in Kauf und zahlt am Ende noch drauf' — zudem fehlen laut Rezensionen einzelne Tankstellen",
+        "Neues Premium-Modell stößt auf Ablehnung: 'Mit dem neuen Premiummodell ist sie viel zu teuer geworden. Ohne Premium ist die Nutzung kaum möglich'; vereinzelt Werbung trotz bezahltem Premium berichtet",
+        "Prognose nicht immer zuverlässig: Nutzer warteten gemäß Prognose auf fallende Preise, die Preise stiegen stattdessen",
+        "Datenschutz-Kritik: Stiftung Warentest wertete ab, weil Gerätedaten für personalisierte Werbung an Drittanbieter gehen; Verbraucherschützer monierten Hintergrund-Übertragung von Mobilfunkanbieter-Name und Geräte-IDs; Play-Store-Datensicherheit nennt Standort-, Nutzungsdaten und Kennungen für Tracking/Werbung",
+        "Funktionsverluste nach Redesign: Preisalarm laut Rezension 'soll wie seit Jahren bald kommen', Ersparnis-Anzeige nicht abschaltbar ('flüssiger als Wasser: überflüssig'), vereinzelt Kartenprobleme"
+      ],
+      "hatLohntSichCheck": false,
+      "besonderheiten": [
+        "KEIN echter Lohnt-sich-Check (streng geprüft): Die beworbene 'Praktische Anzeige der Ersparnis in Euro pro Tankvorgang' ist nur die Preisdifferenz zwischen Tankstellen hochgerechnet auf eine Tankfüllung — Umweg-Spritkosten, Verbrauch oder Break-even fließen nirgends ein (weder in Play-/App-Store-Beschreibung noch in Tests dokumentiert; kein Verbrauchs-/Tankgrößen-Input). Der 'Best deal'-Klick ist ein Preis-Nähe-Filter, keine Wirtschaftlichkeitsrechnung. Beleg ex negativo: t-online publiziert selbst redaktionelle Ratgeber zum MANUELLEN Umweg-Rechnen ('Wann sich der Umweg zur günstigeren Tankstelle wirklich lohnt'), und eine Play-Rezension beklagt, dass man Umwege macht und 'am Ende noch draufzahlt' — die App rechnet/warnt nicht.",
+        "Einzige große Tank-App mit 12h-Preisprognose inkl. konkretem Tankzeitfenster (USP seit 2013)",
+        "Herkunfts-Asset: t-online-Marke mit großer Reichweite + Web-Portal tanken.t-online.de als Zubringer; Android-Package-ID stammt noch aus Telekom-Zeit (de.telekom.tanken)",
+        "Kumuliert ca. 2,5 Mio. Downloads (Eigenangabe in Store-Beschreibung)",
+        "Ströer betreibt parallel die Konkurrenz-App 'mehr-tanken' — zwei Tank-Apps aus demselben Haus",
+        "Monetarisierung rein über Werbung/Mini-Abo, kein Tankstellen-Payment und kein B2B-Datengeschäft erkennbar"
+      ]
+    },
+    {
+      "name": "Fuel Flash (in Deutschland: \"Benzinpreis-Blitz – Tanken App\")",
+      "betreiber": "Mike Weißenfels WebWork (\"mwwebwork\"), Kinnenbitze 10, 56316 Raubach (Impressum benzinpreis-blitz.de); die iOS-App ist im App Store unter dem Anbieternamen \"Michael Naegler\" (Sinzig) gelistet — Kleinst-/Indie-Betreiber, kein Konzern",
+      "webUrl": "https://www.benzinpreis-blitz.de",
+      "plattformen": [
+        "Android (Google Play, Package de.mwwebwork.benzinpreisblitz)",
+        "iOS (App Store, ID 1212144168)",
+        "Web (benzinpreis-blitz.de, Preisvergleich im Browser)",
+        "Android Auto (nur Premium)"
+      ],
+      "hatWebVersion": true,
+      "bewertungPlay": "4,7 (ca. 72.700 Bewertungen laut Netzwelt; 10+ Mio. Downloads) — direkter Play-Store-Abruf war blockiert, ältere Drittquellen nennen 4,3–4,6",
+      "bewertungAppStore": "4,6 (ca. 36.300 Bewertungen, deutscher App Store, direkt von Apple abgerufen)",
+      "kernfunktionen": [
+        "Spritpreisvergleich für 60.000+ Tankstellen in 9 europäischen Ländern (DE, AT, FR, LU, ES, PT, GB, HR, SI) als Liste oder Karte mit farblichen Preisstufen",
+        "Sortierung nach Preis oder Entfernung, Umkreissuche bis 25 km, Standort oder manuelle Ortseingabe",
+        "Preisalarm mit Push-Benachrichtigung (bis zu 5 Alarme konfigurierbar)",
+        "Preisverlauf als Diagramm (Historie bis ca. 4 Wochen) — KEINE Prognose",
+        "Favoriten (bis zu 5 gespeicherte Suchen/Tankstellen)",
+        "Tankstellen-Details: Öffnungszeiten, Services, Zahlungsarten; fehlerhafte Preise melden",
+        "ryd pay Integration (mobiles Bezahlen an der Säule)",
+        "Navigations-Handoff an externe Karten-Apps (kein eigener Routenplaner)",
+        "Premium: werbefrei, Android Auto, Entfernungsanzeige als echte Fahrstrecke statt Luftlinie"
+      ],
+      "staerken": [
+        "Preisaktualität wird von Nutzern stark gelobt: 'Immer sehr aktuell und übersichtlich', 'Preise zu 99% richtig' — dank Direktanbindung an die MTS-K (Tankstellen müssen Preisänderungen binnen 5 Min. melden)",
+        "Einfache, übersichtliche Bedienung ohne Registrierungszwang; Preisalarm und Update-Rate werden in Rezensionen explizit positiv hervorgehoben",
+        "Europa-Abdeckung (9 Länder) als echtes Alleinstellungsmerkmal gegenüber rein deutschen Apps — ein Nutzer berichtet ca. 100 € Ersparnis im Auslandsurlaub",
+        "Sehr günstige Werbefreiheit: Abo 1,49 €/Jahr ('weniger als 15 Cent im Monat') oder Einmalkauf 7,99 € — wird als fair empfunden",
+        "Vom Bundeskartellamt offiziell als MTS-K-Verbraucherinformationsdienst gelistet (Vertrauenssignal)"
+      ],
+      "schwaechen": [
+        "Preis-Latenz im Einzelfall: Nutzerin 'Mohna Lilly' (App Store): 'Leider ab und an stimmen die Preise nicht. Heute seit über 3 Stunden sind die Preise höher an den Tankstellen als die App vorgibt'",
+        "Datenschutz/Werbetracking: aufdringlicher Consent-Dialog mit sehr langer Werbepartner-Liste; Nutzer kritisieren 'Schnüffelei', einzelne löschten die App deswegen sofort (Tracking-Umfang nur per Bezahlversion vermeidbar)",
+        "Veraltete/fehlerhafte Tankstellen-Datenbank: Navigationsrouten führen teils 'zu Feldern' bzw. falschen Orten, geschlossene Tankstellen können nicht als geschlossen markiert werden; Support reagiert laut Nutzern träge",
+        "Kein Routenplaner / keine Tankstellensuche entlang einer Route (auch Redaktionskritik bei Netzwelt); Optik gilt als 'nicht besonders ansprechend'",
+        "Vereinzelte Abstürze direkt beim Start auf manchen Geräten; Sonderkraftstoffe wie HVO100/XTL nicht abgedeckt",
+        "Entfernung in der Gratisversion nur als Luftlinie — echte Fahrstrecke ist hinter der Premium-Schranke"
+      ],
+      "hatLohntSichCheck": false,
+      "datenquelle": "Deutschland: MTS-K direkt — Benzinpreis-Blitz steht auf der offiziellen Liste der zugelassenen Verbraucher-Informationsdienste des Bundeskartellamts (kein Tankerkönig-Reseller). Ausland: jeweilige Behörden (z.B. E-Control in Österreich), ergänzt um eigene Recherche und Nutzermeldungen für nicht gemeldete Kraftstoffsorten.",
+      "monetarisierung": "Kostenlos mit Bannerwerbung und personalisiertem Ad-Tracking; werbefrei per Abo (1,49 €/Jahr) oder Einmalkauf (7,99 €), Premium schaltet zusätzlich Android Auto und Fahrstrecken-Anzeige frei. ryd-pay-Integration vorhanden (eine etwaige Payment-Provision ist nicht öffentlich belegt — unbekannt).",
+      "besonderheiten": [
+        "WICHTIG zur Rechercheprämisse: Ein 'Prognose-Fokus' ist NICHT belegbar. Die App bietet nur Preis-HISTORIE (Verlaufsdiagramm, ca. 4 Wochen rückblickend), keinerlei Preisprognose. Das Prognose-Feature gehört zum Konkurrenten 'TankenApp mit Benzinpreistrend' (T-Online/Telekom) — mögliche Verwechslung.",
+        "Zum Lohnt-sich-Check (streng geprüft): Weder Website, FAQ, Play-/App-Store-Beschreibung noch Testberichte (Netzwelt, iosapps.de) erwähnen eine Umwegkosten-, Break-even- oder Ersparnis-Berechnung. Es gibt nur Sortierung nach Preis/Entfernung; Premium zeigt die Entfernung als Fahrstrecke statt Luftlinie an — das ist reine Distanzanzeige, keine Wirtschaftlichkeitsrechnung. Antwort daher klar: Nein.",
+        "App hieß ursprünglich 'Benzinpreis-Blitz' und wurde international in 'Fuel Flash' umbenannt; im deutschen Store läuft sie weiterhin als 'Benzinpreis-Blitz – Tanken App'.",
+        "Indie-Betrieb (Ein-/Zwei-Personen-Projekt) bei 10+ Mio. Downloads — geringe Organisationstiefe erklärt trägen Support, ist aber zugleich Kostenvorteil.",
+        "Differenzierung im Markt: breiteste Europa-Abdeckung (9 Länder) statt Feature-Tiefe; Web-Version vorhanden (selten bei deutschen Spritpreis-Apps).",
+        "Letzte Version 1.39.13 vom 11.06.2026 — App wird aktiv gepflegt (mehrere Releases pro Quartal)."
+      ]
+    },
+    {
+      "name": "Marken-Apps der Tankstellenketten (Shell, JET, HEM, Esso) — Kategorieanalyse",
+      "betreiber": "Jeweilige Mineralölkette: Shell App = Shell Information Technology International B.V. / Shell Deutschland; Esso App/Esso Pay = ExxonMobil (Payment-Technik: First Data/Fiserv); HEM App = Deutsche Tamoil GmbH; JET (Phillips 66) hat KEINE eigene Verbraucher-App mehr — die eigene App \"JET KLICKe\" wurde im Juni 2022 eingestellt, der Web-Preisalarm zum 31.03.2025; mobiles Bezahlen läuft über die Partner-Plattform PACE (PACE Drive App, DKV Mobility, Hoyer) an 680+ Stationen.",
+      "plattformen": [
+        "iOS (Shell, Esso Pay, HEM)",
+        "Android (Shell, Esso Pay, HEM)",
+        "Apple CarPlay (HEM; PACE Drive für JET)",
+        "JET: keine eigene App — nur Website jet.de + Partner-App PACE Drive"
+      ],
+      "webUrl": "Shell: https://www.shell.de/punkten-und-sparen-mit-shell-clubsmart/shell-app.html | Esso: https://www.esso.de/de-de/esso-app-faqs | HEM: https://www.hem-tankstelle.de/hem-app/tiefpreisgarantie | JET: https://www.jet.de",
+      "hatWebVersion": false,
+      "bewertungPlay": "Shell: ca. 4,0 (10 Mio.+ Downloads, globales Listing; lt. AppBrain \"4 Sterne\" — exakte DE-Zahl unbekannt; Durchschnitt NEUER Rezensionen Nov 2025–Mai 2026 nur noch 2,25 wegen Recharge-Integration, lt. check-app.de); HEM: 4,7 (ca. 2.000 Rezensionen); Esso Pay: unbekannt; JET: keine eigene App",
+      "bewertungAppStore": "Shell: 4,7 (ca. 69.900 Bewertungen, DE); HEM (\"HEM - günstig tanken\"): 4,7 (ca. 3.600); Esso Pay: 4,4 (ca. 2.600); JET: keine eigene App",
+      "kernfunktionen": [
+        "Mobiles Bezahlen direkt an der Zapfsäule (Shell SmartPay an 1.500+ Stationen via PayPal/Kreditkarte/Apple Pay/Google Pay; Esso Pay nur via PayPal; HEM via PayPal/Apple Pay/Google Pay; JET über PACE Drive)",
+        "Treue-/Rabattprogramme: Shell ClubSmart (1–5 Punkte/Liter, ~400 Prämien) + 2 ct/l FuelSave-Rabatt; Esso mit DeutschlandCard-Punkten (Programm endet 30.11.2026); HEM mit Tiefpreisgarantie (bester Preis im 5-km-Umkreis für E5/E10/Diesel)",
+        "Stationsfinder der eigenen Marke mit Filtern (AdBlue, Waschanlage, Ladesäulen) und Preisanzeige der EIGENEN Stationen",
+        "Kostenpflichtige Zusatzdeals: Shell V-Power SmartDeal (Abo: V-Power zum FuelSave-Preis)",
+        "E-Mobilität: Shell Recharge (Laden + Ladekarten) seit Herbst 2025 in die Shell App integriert",
+        "Digitale Belege, Waschtickets/Waschrabatte (HEM: 2 EUR Waschrabatt)",
+        "Nur HEM: marktweiter Preisvergleich über 15.000+ Tankstellen aller Marken, Preisalarm mit Wunschpreis, 7-Tage-Preishistorie"
+      ],
+      "staerken": [
+        "Bezahlen an der Zapfsäule wird von Nutzern als echter Komfortgewinn gelobt: Shell SmartPay gilt lt. Rezensionen und check-app.de als 'eine der stärksten Funktionen' ('stressfreies Bezahlen', intuitive Bedienung) — App Store 4,7 bei ~70.000 Bewertungen; connect-Test: Shell 89 Punkte ('sehr gut'), Esso Pay 83 ('gut')",
+        "Geldwerte Vorteile, die neutrale Preisvergleichs-Apps nicht bieten: 2 ct/l Shell-FuelSave-Rabatt, ClubSmart-/DeutschlandCard-Punkte, V-Power zum Normalpreis per SmartDeal — Nutzer berichten von Ersparnis 'bei fast jedem Tanken' (HEM)",
+        "HEM-Tiefpreisgarantie wird in Rezensionen als Highlight gelobt: 'immer der beste Preis ohne ständiges Vergleichen' — Preis wird per MTS-K-Daten auf das 5-km-Minimum gematcht, spart Zeit und Umweg",
+        "HEM-App: übersichtliches Design, wenig Werbung, zuverlässiger Preisvergleich (Play 4,7 / App Store 4,7)",
+        "Shell App vereint Tanken + E-Laden + Punkte + Payment in einer App (von Teilen der Nutzer als praktisch gelobt, Recharge-Integration inklusive Ladesäulen-Navigation)"
+      ],
+      "schwaechen": [
+        "Shell: massiver Qualitätseinbruch seit der Recharge-Integration (Herbst 2025) — verschwundene/nicht migrierte Ladekarten, fehlende Transaktionen, instabile Ladevorgänge, App-Abstürze; Durchschnitt neuer Bewertungen stürzte von 4,20 auf 2,25 Sterne (Nov 2025–Mai 2026, lt. check-app.de-Auswertung)",
+        "Shell: 2-ct-Rabatt ist NICHT Standard — er muss manuell statt der Punkte aktiviert werden, Umstellung dauert bis zu 72 h; Nutzer nennen den Prozess 'überkompliziert'; dazu Login-/Session-Abbrüche genau an der Zapfsäule ('erneute Anmeldungen, zusätzliche Browserfenster'); it-finanzmagazin-Test: 'UX aus der Hölle, überladenes Sammelsurium'",
+        "Esso Pay: Zahlung funktioniert ausschließlich über PayPal (kein Apple/Google Pay, keine Kreditkarte); Rezensionen berichten App-Abstürze, Probleme bei der Zapfsäulen-Auswahl und vereinzelt Abrechnungsdifferenzen; mit dem DeutschlandCard-Aus (30.11.2026) verliert die App ihren zentralen Treue-Anker",
+        "HEM: Tiefpreisgarantie und App-Bezahlung sind NICHT kombinierbar — der Garantie-Coupon muss als Barcode an der Kasse eingelöst werden; Google-Pay-Einrichtung scheitert bei mehreren Nutzern (faktisch nur PayPal), Verbindungsfehler; Nutzer: 'deutlich weniger intuitiv als Clever Tanken'",
+        "Kategorie-Schwäche Markenbindung: Shell und Esso zeigen nur Preise der EIGENEN Stationen — kein neutraler Marktvergleich; JET hat den App-Kanal komplett aufgegeben (KLICKe 2022 eingestellt, Preisalarm 03/2025 beendet)"
+      ],
+      "hatLohntSichCheck": false,
+      "datenquelle": "Überwiegend eigene/proprietäre Preisdaten der jeweiligen Kette (Shell- und Esso-App zeigen nur Preise der eigenen Stationen). Ausnahme HEM: marktweiter Vergleich von 15.000+ Tankstellen; die Tiefpreisgarantie beruht laut HEM explizit auf den offiziellen Preisdaten der Markttransparenzstelle für Kraftstoffe (MTS-K). JET: keine eigene App; Preisinfos nur über jet.de. Ob HEM die MTS-K direkt oder über einen Dienstleister (z.B. Tankerkönig) anbindet: unbekannt.",
+      "monetarisierung": "Alle Apps kostenlos, keine Drittwerbung. Geschäftsmodell ist Kundenbindung an die eigene Kette: Loyalty-Programme (ClubSmart; DeutschlandCard bei Esso bis 30.11.2026; HEM-Tiefpreisgarantie), Payment-Abwicklung an der Zapfsäule und kostenpflichtige Upsells (Shell V-Power SmartDeal als bezahltes Abo). Die App ist Mittel zum Treibstoff- und Shop-Umsatz, kein eigenständiges Erlösprodukt.",
+      "besonderheiten": [
+        "KRITISCHE FRAGE belegt verneint: Keine der Marken-Apps berechnet, ob sich der Umweg zur billigeren Tankstelle wirtschaftlich lohnt (keine Umweg-Spritkosten, kein Break-even, keine Netto-Ersparnis). Belege: connect-Vergleichstest und check-app.de-Tests erwähnen keinerlei solche Funktion; Esso bietet nur 'günstigste Route ZUR gewählten Station' (Routing, kein Wirtschaftlichkeits-Check); HEM bietet Preis-Sortierung, Routenplaner und Preisalarm — ebenfalls kein Break-even. HEMs Tiefpreisgarantie ist strategisch bemerkenswert, weil sie die Umweg-Frage UMGEHT statt sie zu beantworten: der 5-km-Bestpreis wird an der HEM-Kasse gematcht, der Umweg entfällt",
+        "JET ist die Anomalie der Kategorie: eigene App (KLICKe) im Juni 2022 eingestellt, Preisalarm zum 31.03.2025 beendet; setzt vollständig auf die White-Label-Plattform PACE Connected Fueling (PACE Drive App an allen 680+ Stationen) und die eigene Website",
+        "DeutschlandCard wird zum 30.11.2026 komplett eingestellt (Punkte einlösbar bis längstens 31.12.2027) — Esso verliert damit Mitte 2026 sein einziges Bonusprogramm; strategisches Vakuum bei der Kundenbindung",
+        "Shell als Warnbeispiel für Feature-Bündelung: Die Integration der Recharge-App (Herbst 2025) ließ den Durchschnitt neuer Bewertungen von 4,20 auf 2,25 Sterne abstürzen — Instabilität genau dort, wo Zuverlässigkeit zahlungskritisch ist",
+        "hatWebVersion=false bezieht sich auf die Apps selbst (Payment/Loyalty sind App-only); die Marken-Websites bieten lediglich Stationsfinder, JET zusätzlich Preisalarm per Web-Registrierung",
+        "Wettbewerbsrelevanz für TankenGPT: Marken-Apps konkurrieren nicht über Preistransparenz, sondern über Rabatte/Payment-Komfort an der eigenen Säule; der neutrale, marktweite 'Lohnt-sich-der-Umweg'-Check ist in dieser Kategorie komplett unbesetzt",
+        "Quellen u.a.: shell.de, esso.de, hem-tankstelle.de, jet.de, apps.apple.com (DE-Listings Shell id1464649113, HEM id6738980952, Esso Pay id1449167509), play.google.com, check-app.de (05/2026 Shell; 10/2025 HEM), connect-living.de Tank-App-Vergleich, it-finanzmagazin.de SmartPay-Test, teltarif.de, stadt-bremerhaven.de (PACE/JET), dealdoktor.de/giga.de (DeutschlandCard-Aus)"
+      ]
+    },
+    {
+      "name": "Spritpreise in Google Maps & Waze (Kategorie: Preisanzeige in Navigations-Plattformen)",
+      "betreiber": "Google LLC (Google Maps; Waze ist seit 2013 Google-Tochter)",
+      "plattformen": [
+        "Android (Google Maps, Waze)",
+        "iOS (Google Maps, Waze)",
+        "Android Auto / Apple CarPlay (Navigation; Preisanzeige eingeschränkt)",
+        "Web nur ohne Spritpreis-Funktion (Google Maps Web, Waze Live Map)"
+      ],
+      "webUrl": "https://www.google.com/maps bzw. https://www.waze.com (Spritpreise jeweils nur in der mobilen App)",
+      "hatWebVersion": false,
+      "bewertungPlay": "Waze: 4,3 (ca. 8,9 Mio. Rezensionen, Play-Store-Seite Juni 2026). Google Maps: je nach Quelle stark divergierend, AppBrain Mitte 2026 ca. 3,2 bei ca. 19 Mio. Bewertungen (historisch ~3,9–4,0); exakter aktueller Play-Store-Wert für Google Maps: unbekannt (Seite nicht maschinell auslesbar)",
+      "bewertungAppStore": "Google Maps: 4,6 (ca. 914.000 Bewertungen, deutscher App Store). Waze: 4,6 (ca. 18.400 Bewertungen, deutscher App Store)",
+      "kernfunktionen": [
+        "Aktuelle Spritpreise (Super E5, E10, Diesel, teils Super Plus) direkt am Tankstellen-Eintrag bzw. bei Suche nach 'Tankstelle' in Google Maps",
+        "Tankstellen-Liste mit Preisen entlang der aktiven Route über 'Zwischenstopp hinzufügen' (Google Maps); Umweg wird direkt ins Routing übernommen",
+        "Waze: bevorzugte Spritsorte hinterlegbar, Tankstellen sortierbar nach Preis, Entfernung oder Marke; Preise werden stündlich automatisch aktualisiert (Feature in DE am 27.04.2025 reaktiviert)",
+        "Vollintegration in Navigation/Verkehrslage – kein Wechsel in eine separate Tank-App nötig",
+        "Kostenlos, ohne Registrierung oder Zusatz-App nutzbar"
+      ],
+      "staerken": [
+        "Null Zusatzaufwand: Preise erscheinen genau dort, wo ohnehin navigiert wird – von Medien (giga.de: 'Diese Funktion muss jeder Autofahrer kennen') und Nutzern als Hauptvorteil genannt; riesige installierte Basis macht es zur Default-Lösung",
+        "Entlang-der-Route-Funktion wird gelobt: Tankstellen mit Preisen als Zwischenstopp anzeigen und mit einem Tipp in die Navigation übernehmen (Google Maps)",
+        "Waze-Community begrüßte die Rückkehr der Preisanzeige 2025 ausdrücklich (Kommentare bei Caschys Blog: Nutzer bevorzugen Waze teils gegenüber Pace Drive); Sortierung nach Preis + einstellbare Spritsorte gilt als praktisch",
+        "Komplett kostenlos, keine Anmeldung, keine separate App-Installation nötig"
+      ],
+      "schwaechen": [
+        "Veraltete/falsche Preise: Nutzer berichten (gutefrage, Caschys Blog), dass die Google-Maps-Preise 'massiv von der Realität bzw. anderen Tank-Apps divergieren' und nicht auf aktuellem Stand sind – dedizierte Apps gelten als aktueller",
+        "Eingeschränkte Sortenanzeige: Übersicht/Routenliste zeigt nur Super 95/E5, andere Sorten erst nach Antippen jeder Station; Kraftstoffsorte in Google Maps (v.a. iOS) nicht filterbar; Autogas, LKW-Diesel, HVO fehlen (Nutzerkommentar bei Caschys Blog)",
+        "Unvollständige Abdeckung: nicht alle Tankstellen haben hinterlegte Preise, Anzeige 'teilweise neu, aber ungenau' (stadt-bremerhaven.de); bei Waze fehlten nach dem Relaunch zunächst Dieselpreise auf Detailseiten",
+        "Keine Tank-App-Kernfeatures: keine Preishistorie, keine Preisprognose ('jetzt tanken oder warten?'), keine Preisalarme, keine Web-Nutzung der Preisfunktion; Waze aktualisiert nur stündlich, obwohl MTS-K minutengenau liefert",
+        "Featuritis-Kritik: Kommentatoren monieren, Maps werde überladen und die Preisfunktion wirke unfertig integriert"
+      ],
+      "hatLohntSichCheck": false,
+      "datenquelle": "MTS-K (Markttransparenzstelle für Kraftstoffe des Bundeskartellamts): Google bezieht die Preise als zugelassener Verbraucher-Informationsdienst direkt aus MTS-K-Daten (Berichte von t-online/wiwo/dhz); Waze erhielt laut Berichten (schmidtisblog.de, stadt-bremerhaven.de) zum Relaunch am 27.04.2025 ebenfalls eine MTS-K-Anbindung mit stündlicher Aktualisierung – zuvor manuelle Community-Meldungen, die wegen Ungenauigkeit eingestellt wurden. Kein Hinweis auf Tankerkönig als Zwischenquelle: unbekannt/nicht belegt",
+      "monetarisierung": "Komplett kostenlos; indirekt werbefinanziert (Waze: Werbe-Pins/Branded Ads, Google Maps: gesponserte Einträge/Promoted Pins) und Teil des Google-Datenökosystems. Keine Premium-Stufe, keine Tank-Payment-Provision in Deutschland bekannt",
+      "besonderheiten": [
+        "Kein eigenständiges Produkt, sondern Gratis-Nebenfeature der zwei dominanten Navi-Plattformen – strategisch die größte Reichweiten-Bedrohung für dedizierte Tank-Apps, aber funktional deutlich flacher",
+        "KEIN Lohnt-sich-Check (streng geprüft): Beide Apps zeigen nur Preise an bzw. sortieren nach Preis/Entfernung/Marke. Google Maps zeigt beim Zwischenstopp die zusätzliche Fahrzeit, aber keine Umweg-Spritkosten, keinen Break-even und keine reale Ersparnis. Beleg: Medienberichte (dhz.net, basicthinking.de 04/2026) warnen Nutzer ausdrücklich, sie müssten SELBST abwägen, 'ob sich ein Umweg wirtschaftlich lohnt', weil der Mehrverbrauch den Preisvorteil auffressen kann – genau diese Rechnung nimmt keine der beiden Apps ab",
+        "Historie: Google Maps zeigt Spritpreise in DE seit ca. Herbst 2020 (iOS) bzw. Februar 2021 (Android, serverseitig); Waze stellte Community-Preise ein und reaktivierte die Preisanzeige in DE erst am 27.04.2025 mit MTS-K-Daten; deutsche Waze-Freiwillige überarbeiteten dafür seit Nov. 2024 die Tankstellendaten",
+        "Spritpreis-Anzeige funktioniert nur in den mobilen Apps – im Browser (Google Maps Web, Waze Live Map) werden keine Preise angezeigt (netzwelt.de)",
+        "Store-Bewertungen messen die Gesamt-App (Navigation), nicht die Spritpreis-Funktion – als Qualitätssignal für die Preisfunktion nur bedingt aussagekräftig"
+      ]
+    }
+  ],
+  "uspCheck": {
+    "widerlegt": true,
+    "gefundeneApps": [
+      "Tankschwein (Android, pocketnavigation.de GmbH, MTS-K-Daten, DE-Markt)"
+    ],
+    "begruendung": "Die Behauptung ist in ihrem Kern widerlegt: Die deutsche Android-App \"Tankschwein billig tanken\" (Entwickler: pocketnavigation.de GmbH, Datenquelle MTS-K, ~14.750 Tankstellen in Deutschland) führt genau den behaupteten Lohnt-sich-Check durch. Belege: (1) Offizielle Play-Store-Beschreibung (via apkgk.com-Mirror, Play-Listing de.tankschwein aktiv): \"Berechnung der echten Ersparnis auch unter Berücksichtigung des Umweges (Kosten pro km einstellbar)\". (2) Entwickler-Ankündigung auf pocketnavigation.de (2020): \"Berechnung der echten Ersparnis unter Berücksichtigung der Kosten für Umweg (Kosten pro km und Kosten pro Zeit individuell einstellbar)\" sowie \"Darstellung des Preises pro Liter oder des Gesamtpreises (Tankvolumen einstellbar)\" und Sortierung nach \"echter Routenstrecke\" (nicht Luftlinie). Die App berechnet also: Umwegkosten (echte Routendistanz x einstellbare km-Kosten, optional Zeitkosten) UND reale Netto-Ersparnis (Ersparnis bei eingestelltem Tankvolumen minus Umwegkosten) und schlägt bei Routensuche drei Varianten vor (ohne Umweg / absolut günstigste im Max-Umweg / \"optimale\" als Kompromiss aus Umweg und Ersparnis). Damit sind 2 der 3 genannten Kriterien (Umwegkosten, reale Netto-Ersparnis) explizit erfüllt; eine explizit ausgewiesene Break-even-LITERMENGE als Output konnte ich nicht belegen - die App rechnet stattdessen mit fest eingestelltem Tankvolumen, was funktional dieselbe Entscheidung liefert. Wer auf der strengen Lesart \"alle drei Outputs in einer App\" besteht, findet die Break-even-Litermenge nur in Web-Rechnern (tanken.de/lohnt-sich-der-umweg: berechnet die Mindest-Litermenge; benzinpreis.de/detour-calculator; bessertanken.de), nicht in einer App. Gegengeprüft und OHNE diese Funktion: Benzinpreis-Blitz (App-Store-Beschreibung: nur Preisalarm/Preisverlauf, kein Umwegrechner) und PACE Drive (nur Preisvergleich/Bezahlen). Einschränkungen: Tankschwein ist Android-only und Nische; die Kernaussage \"keine deutsche Spritpreis-App berechnet, ob sich der Umweg wirtschaftlich lohnt\" ist dennoch falsch. Quellen: play.google.com/store/apps/details?id=de.tankschwein, tankschwein.de, pocketnavigation.de/2020/01/neu-tankschwein-app-tanken/, apkgk.com/de.tankschwein, tanken.de/lohnt-sich-der-umweg/, benzinpreis.de/en/detour-calculator, apps.apple.com/de/app/benzinpreis-blitz/id1212144168."
+  },
+  "synthese": {
+    "unsereVorteile": [
+      "Transparenz des Lohnt-sich-Checks: TankLotse zeigt als einzige App die komplette Rechnung offen (Brutto-Vorteil minus Umweg-Spritkosten, Break-even-Liter, klares Verdikt). mehr-tankens 'Flizzi' rechnet vergleichbar, ist aber eine Black-Box-Empfehlung hinter dem Plus-Abo; Tankschwein zeigt keine Break-even-Litermenge. Achtung: 'einzige App mit Umwegrechnung' ist als Claim WIDERLEGT — nur 'transparentester, gratis verfügbarer' Check ist haltbar.",
+      "Lohnt-sich-Check gratis und plattformunabhängig: Bei mehr-tanken ist die Umweg-Empfehlung Abo-Feature, Tankschwein ist Android-only-Nische, alle anderen (Clever Tanken, ADAC, TankenApp, Benzinpreis-Blitz, Google/Waze, Marken-Apps) haben gar keinen — Medien (dhz.net, basicthinking) raten Nutzern explizit, selbst zu rechnen.",
+      "Datenschutz als belegbarer Vorsprung: 0 Tracker, keine Dritt-Werbung, Konto optional — gegenüber Clever Tanken (9 Tracker lt. Kuketz, DSGVO-mangelhaftes Consent-Banner), mehr-tanken und TankenApp (Stiftung-Warentest-Kritik, Werbe-Tracking) und ADAC (Login-Zwang seit v6.0).",
+      "Werbefreiheit ohne Bezahlschranke: Werbung ist der Beschwerdepunkt Nr. 1 bei Clever Tanken ('zerstört die Übersicht') und TankenApp ('aggressive TikTok/Temu-Werbung'); TankLotse ist komplett werbefrei ohne Abo.",
+      "Fahrzeugprofile mit Verbrauch + Tankmengen-Wahl fließen direkt in die Ersparnis-Rechnung ein — Clever Tankens Fahrzeugprofil filtert nur Sorten, TankenApps 'Ersparnis in Euro' ist bloß Preisdifferenz mal Tankfüllung ohne Umwegkosten.",
+      "Basis-Featureparität trotz Ein-Personen-Projekt schon live: Preisalarme, Favoriten, gespeicherte Routen mit Stationen entlang der Strecke, Karten-Handoff — das deckt die meistgelobten Kernfeatures der Konkurrenz ab."
+    ],
+    "derenVorteile": [
+      "Distribution und Vertrauen: Alle aktiven Wettbewerber sind in beiden App-Stores mit Millionen Downloads und jahrelanger Markenhistorie (Clever Tanken seit 1999, ADAC, t-online/Ströer, Motor Presse); TankLotse hat null Store-Präsenz, null Nutzer, null Marke.",
+      "Zuverlässigkeit/Geschwindigkeit: 'Kurz öffnen, Preis checken, fertig' ist DER gelobte Kern-Use-Case der Kategorie. Ein 60-Sekunden-Cold-Start auf Free-Hosting ist dafür disqualifizierend — schlechter als jede einzelne Konkurrenz-App.",
+      "Datenanbindung: Clever Tanken, ADAC, mehr-tanken, Benzinpreis-Blitz und Google sind direkt zugelassene MTS-K-Verbraucherinformationsdienste; TankLotse hängt am Zwischenhändler Tankerkönig (zusätzliche Latenz- und Ausfall-Abhängigkeit).",
+      "Genauigkeit der Umwegberechnung: Ausgerechnet Tankschwein — der direkte USP-Konkurrent — rechnet mit echter Routenstrecke und einstellbaren Zeitkosten; TankLotse schätzt nur Luftlinie × 1,3. Beim eigenen Kernfeature ist der Nischenkonkurrent methodisch präziser.",
+      "Preis-Historie und Prognose: Clever Tanken (Monatsverlauf), ADAC (24h/7T-Charts + Tank-Prognose), mehr-tanken (Flizzi-Prognose), TankenApp (12h-Prognose mit Tankzeitfenster), Benzinpreis-Blitz (4-Wochen-Historie) — TankLotse hat nichts davon; es ist der meistgelobte Differenziator in Reviews.",
+      "Geldwerte Vorteile statt nur Information: clever pay/clever-deal, Shell SmartPay + 2 ct/l Rabatt, HEM-Tiefpreisgarantie (umgeht die Umwegfrage komplett), ryd/PACE — TankLotse hat keinerlei Bezahl- oder Rabattfunktion.",
+      "Sorten- und Marktabdeckung: Clever Tanken mit Superplus/LPG/CNG/AdBlue, TankenApp mit 9 Sorten, ADAC mit HVO100 und 6 Auslandsmärkten, Benzinpreis-Blitz mit 9 Ländern; TankLotse kann nur E5/E10/Diesel in Deutschland.",
+      "Plattform-Integration: CarPlay/Android Auto (Clever Tanken, ADAC, HEM, Benzinpreis-Blitz Premium) und die Gratis-Preisanzeige direkt in Google Maps/Waze senken die Wechselmotivation zu einer unbekannten Web-App massiv."
+    ],
+    "featureLuecken": [
+      {
+        "feature": "Echtes Straßen-Routing für die Umwegberechnung (statt Luftlinie × 1,3)",
+        "werHatEs": "Tankschwein (echte Routenstrecke), ADAC Drive (volle Navigation), Google Maps (Umweg im Routing)",
+        "prio": "hoch",
+        "aufwand": "mittel",
+        "begruendung": "Trifft den USP direkt: Wer mit 'realer Ersparnis' wirbt, aber die Distanz nur schätzt, ist angreifbar — der einzige direkte Feature-Konkurrent rechnet bereits exakt. Mit OSRM/GraphHopper-Free-Tier für 1 Person machbar."
+      },
+      {
+        "feature": "Preis-Historie pro Tankstelle (7/30-Tage-Chart)",
+        "werHatEs": "Clever Tanken, ADAC Drive, mehr-tanken, TankenApp, Benzinpreis-Blitz, (Bertha)",
+        "prio": "hoch",
+        "aufwand": "mittel",
+        "begruendung": "Kategorie-Standard bei praktisch allen relevanten Apps und in Reviews vielgelobt. Tankerkönig-Daten ab sofort selbst loggen — jeder Monat Verzögerung kostet Datenhistorie, die nicht nachholbar ist."
+      },
+      {
+        "feature": "Native Apps / Store-Präsenz (Android zuerst, perspektivisch CarPlay/Android Auto)",
+        "werHatEs": "Alle aktiven Wettbewerber (Clever Tanken, ADAC, mehr-tanken, TankenApp, Benzinpreis-Blitz, Marken-Apps, Google/Waze)",
+        "prio": "hoch",
+        "aufwand": "gross",
+        "begruendung": "Tank-Apps werden situativ am Steuer/unterwegs genutzt — eine reine Web-App ohne Homescreen-Icon und Push verliert genau diesen Moment. Zwischenschritt: installierbare PWA, dann TWA-Wrapper in den Play Store."
+      },
+      {
+        "feature": "Push-Benachrichtigungen für Preisalarme",
+        "werHatEs": "Clever Tanken, mehr-tanken (Plus), TankenApp, Benzinpreis-Blitz",
+        "prio": "hoch",
+        "aufwand": "klein",
+        "begruendung": "Preisalarm existiert bei TankLotse bereits, ist aber ohne Push-Zustellung halb wertlos. Web-Push-API ist mit kleinem Aufwand nachrüstbar und macht das Feature konkurrenzfähig, bevor native Apps existieren."
+      },
+      {
+        "feature": "Tankzeitpunkt-Prognose ('jetzt tanken oder warten?')",
+        "werHatEs": "TankenApp (12h-Prognose, USP), ADAC Drive (Tanken-Prognose), mehr-tanken (Flizzi-Trend)",
+        "prio": "mittel",
+        "aufwand": "gross",
+        "begruendung": "Meistgelobter Differenziator bei drei großen Wettbewerbern, aber für 1 Person vor Launch zu groß; setzt zudem eigene Preis-Historie voraus. Erst nach Historie-Feature angehen — simple Heuristik (Tageszeitmuster) als Einstieg reicht."
+      },
+      {
+        "feature": "Weitere Spritsorten (Superplus, Premium-Diesel, LPG, CNG, HVO100)",
+        "werHatEs": "Clever Tanken (per Community), TankenApp (9 Sorten), ADAC (HVO100)",
+        "prio": "niedrig",
+        "aufwand": "gross",
+        "begruendung": "Nicht in MTS-K/Tankerkönig enthalten — erfordert Community-Meldungen, die ohne Nutzerbasis nicht funktionieren. Bewusst zurückstellen; E5/E10/Diesel decken die Masse ab."
+      },
+      {
+        "feature": "Mobiles Bezahlen / Rabatte an der Säule",
+        "werHatEs": "Clever Tanken (clever pay), Shell SmartPay, Esso Pay, HEM, ryd/PACE (u.a. für JET)",
+        "prio": "niedrig",
+        "aufwand": "gross",
+        "begruendung": "Echter Nutzwert, aber für ein 1-Personen-Projekt vor Markteintritt unrealistisch (Payment-Partner, Haftung). Shells Recharge-Debakel (4,2 auf 2,25 Sterne) zeigt zudem das Risiko überhasteter Bündelung."
+      },
+      {
+        "feature": "Auslandspreise / Grenzregionen",
+        "werHatEs": "Benzinpreis-Blitz (9 Länder), ADAC Drive (6 Länder)",
+        "prio": "niedrig",
+        "aufwand": "gross",
+        "begruendung": "Wiederkehrender Wunsch für Grenzpendler und Urlaub, aber jede Länderquelle ist eigene Integrationsarbeit. Erst relevant, wenn der DE-Kern sitzt."
+      }
+    ],
+    "topMassnahmen": [
+      "1. Cold-Start eliminieren (vor allem anderen): Backend auf bezahltes Mini-Hosting umziehen (z.B. Hetzner/Fly.io, ~5 €/Monat) oder Keep-alive-Ping einrichten. 60 s Wartezeit in einer Kategorie, deren Kern-Lob 'kurz öffnen, Preis checken, fertig' lautet, ist ein absoluter Launch-Blocker — höchste Wirkung pro Aufwandsstunde im gesamten Projekt.",
+      "2. Marketing-Claim sofort korrigieren: 'Einzige App mit Lohnt-sich-Check' ist widerlegt (Tankschwein, mehr-tankens Flizzi) und juristisch/reputativ riskant. Neuer haltbarer Claim: 'Der einzige transparente Lohnt-sich-Check — komplette Rechnung offen, Break-even-Liter, gratis, ohne Abo, ohne Werbung' — explizit gegen Flizzis Black-Box hinter Paywall positioniert.",
+      "3. Echtes Routing in den Lohnt-sich-Check einbauen (OSRM-Demo-Server oder GraphHopper Free Tier statt ×1,3-Faktor): Der USP muss methodisch mindestens so gut sein wie Tankschwein, sonst ist die Kernrechnung angreifbar. Übergangsweise die Schätzung in der UI ehrlich als 'ca.-Wert' kennzeichnen.",
+      "4. Tankerkönig-Preise ab sofort selbst historisieren (simpler Cron + DB): kostet fast nichts, ist aber Voraussetzung für Preis-Historie und spätere Prognose — verlorene Monate sind nicht nachholbar. Chart-UI kann später folgen.",
+      "5. PWA installierbar machen (Manifest, Offline-Shell, Homescreen-Prompt) und Web-Push für die vorhandenen Preisalarme nachrüsten — macht Alarm-Feature real nutzbar und schafft App-Gefühl ohne Store-Aufwand.",
+      "6. Zeitstempel der letzten MTS-K-Preismeldung an jeder Station anzeigen: Preisabweichung an der Säule ist der häufigste 1-Stern-Grund bei Clever Tanken, TankenApp und Benzinpreis-Blitz. Die Latenz kann niemand beheben — aber Transparenz darüber hat keiner, und sie passt zur Ehrlichkeits-Positionierung.",
+      "7. Privacy/Werbefrei zur Kernbotschaft der Landingpage machen ('0 Tracker, 0 Werbung, kein Konto nötig') und aktiv eine Prüfung durch Kuketz-Blog/mobilsicher anstreben — das ist die direkte Antwort auf die dokumentierten Top-Beschwerden über Clever Tanken und TankenApp und kostenloses Vertrauens-Marketing.",
+      "8. SEO-/Content-Hebel 'Lohnt sich der Umweg?': Die Suchintention bedienen bislang nur Web-Rechner (tanken.de, benzinpreis.de) — ein interaktiver, geteilter Umweg-Rechner als öffentliche Landingpage ist der billigste Akquisekanal für ein Projekt ohne Marketingbudget und führt direkt zum Produkt.",
+      "9. Play-Store-Eintrag via TWA-Wrapper der PWA (Android zuerst — dort ist ADAC mit 3,2 Sternen nach dem Drive-Relaunch am verwundbarsten und Tankschwein der einzige USP-Konkurrent): Auffindbarkeit 'Tank-App' entsteht fast nur im Store. iOS später.",
+      "10. Bertha-Lektion als Produktleitplanke verankern: werbefrei + kein Login + eine Kernfunktion exzellent — und Feature-Versuchungen (Payment, E-Laden, News) bewusst ablehnen. ADAC Drive und Shell zeigen, dass Feature-Bündelung Bewertungen ruiniert; die durch Berthas Ende hinterlassene Lücke ('tankste!' entstand als Ersatz) ist exakt TankLotses Positionierung."
+    ],
+    "marktluecke": "Die Review-Daten zeigen vier wiederkehrende, kategorieweite Beschwerden, die TankLotse strukturell — nicht nur behauptet — adressieren kann: (1) Aggressive Werbung: Beschwerdepunkt Nr. 1 bei Clever Tanken ('Werbung zerstört die Übersicht') und TankenApp ('TikTok/Temu-Werbung, kaum schließbar'); TankLotse ist werbefrei ohne Abo-Erpressung. (2) Tracking/Datenschutz: 9 Tracker bei Clever Tanken (Kuketz), Stiftung-Warentest-Kritik an mehr-tanken und TankenApp; TankLotse hat null Tracker und keine Bewegungsprofile. (3) Login-Zwang und Paywalls für Kernfunktionen: ADAC erzwingt seit v6.0 ein Konto, mehr-tanken sperrt ausgerechnet die Umweg-Empfehlung hinter das Plus-Abo; bei TankLotse ist der Lohnt-sich-Check gratis und das Konto optional. (4) Feature-Überladung und Redesign-Frust: ADAC Drive (Absturz auf ~3,2 Sterne) und Shell (4,2 auf 2,25 nach Recharge-Integration) beweisen, dass Nutzer fokussierte, schnelle Apps wollen. Der Markt hat diese Lücke schon einmal bewiesen: Berthas Einstellung (werbefrei, ohne Login, klare UI) hinterließ eine so spürbare Leere, dass die Community mit 'tankste!' einen Ersatz baute. Positionierung: 'Die ehrliche Tank-App — rechnet dir transparent vor, ob sich der Umweg lohnt. Ohne Werbung, ohne Tracker, ohne Konto, ohne Abo.' Wichtig: Diese Positionierung ist nur glaubwürdig, wenn Performance (Cold-Start!) und Datenaktualität stimmen — Langsamkeit und falsche Preise sind die zwei Beschwerden, die TankLotse aktuell selbst reproduzieren würde.",
+    "fazit": "Schonungslos: TankLotse hat aktuell kein verteidigbares Alleinstellungsmerkmal im strengen Sinn — der Lohnt-sich-Check existiert bei Tankschwein (methodisch sogar präziser, mit echtem Routing) und als Black-Box bei mehr-tanken. Was bleibt, ist ein schmaler, aber realer Vorsprung: die transparenteste Umsetzung (offene Rechnung, Break-even-Liter, klares Verdikt) gratis und plattformunabhängig, kombiniert mit echter Werbe- und Trackingfreiheit in einer Kategorie, deren Top-Beschwerden genau Werbung, Tracking, Login-Zwang und Paywalls sind. Die größten Risiken sind nicht konzeptionell, sondern operativ: 60-s-Cold-Start, fehlende Store-Präsenz und die ×1,3-Schätzung würden bei Launch exakt die Kritik provozieren, mit der die Konkurrenz abgestraft wird. Realistischer Weg für ein 1-Personen-Projekt: kein Frontalangriff auf Clever Tanken/ADAC, sondern die Bertha-Lücke besetzen — eine schnelle, ehrliche, fokussierte App mit dem transparenten Umweg-Rechner als Speerspitze, akquiriert über die unbesetzte 'Lohnt sich der Umweg?'-Suchintention. Bedingung: erst Hosting und Routing fixen, dann launchen — in umgekehrter Reihenfolge verbrennt man den einzigen Vertrauensvorschuss, den eine unbekannte Marke hat."
+  }
+}

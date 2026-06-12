@@ -46,11 +46,15 @@ services:
       - key: GEOCODER_USER_AGENT
         value: "TankLotse/1.0 (+https://tanklotse-landing.onrender.com)"
       - key: ROUTING_ENABLED
-        value: "false"
+        value: "true"
       - key: ROUTING_PROVIDER
-        value: noop
+        value: google
       - key: ROUTING_PROVIDER_MODE
-        value: disabled
+        value: live
+      # Google-Maps-Key mit Routes-API-Freigabe — Wert nur im Render-Dashboard,
+      # nie im Repo (sync: false laesst Render den bestehenden Wert behalten).
+      - key: GOOGLE_ROUTING_API_KEY
+        sync: false
       - key: PUSH_ENABLED
         value: "false"
       - key: PUSH_PROVIDER_MODE
