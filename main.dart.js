@@ -115202,7 +115202,7 @@ G(a){var s=null,r=A.lZ(20)
 return A.kV(s,A.i8(A.b([A.W0(this.e,s,s,16),B.Q4,new A.k0(1,B.e0,A.au(this.d,s,B.ba,s,B.dM,s,s),s)],t.p),B.Z,B.N,B.bq),B.v,s,new A.ee(this.c,s,s,r,s,s,B.be),s,s,B.Yq,s)}}
 A.ajK.prototype={
 ga97(){if(this.a)return" (exakte Strecke)"
-return" (gesch\xe4tzte Entfernung)"}}
+return" (gesch\xe4tzte Fahrstrecke)"}}
 A.Zd.prototype={
 mc(a,b){var s=null
 if(!b.rX($.afp(),t.y))return B.b5
