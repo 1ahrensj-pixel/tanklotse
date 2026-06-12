@@ -16,34 +16,64 @@ export class CacheService implements OnModuleInit, OnModuleDestroy {
   private readonly logger = new Logger(CacheService.name);
   private redis!: Redis;
 
+  // Begrenzt die Logflut bei einem laengeren Redis-Ausfall: nach dem ersten
+  // Fehler wird erst nach Ablauf des Fensters wieder geloggt.
+  private lastErrorLogAt = 0;
+
   async onModuleInit() {
     this.redis = new Redis(process.env.REDIS_URL ?? 'redis://localhost:6379', {
-      maxRetriesPerRequest: 3,
+      maxRetriesPerRequest: 2,
+      // Kein Offline-Queueing: faellt Redis aus, scheitern Commands sofort
+      // statt sich aufzustauen — der Cache ist nur Beschleuniger, kein Muss.
+      enableOfflineQueue: false,
       lazyConnect: false,
     });
-    this.redis.on('error', (e) => this.logger.error(`Redis-Fehler: ${e.message}`));
+    this.redis.on('error', (e) => this.warnThrottled(e.message));
   }
 
   async onModuleDestroy() {
-    await this.redis?.quit();
+    await this.redis?.quit().catch(() => undefined);
   }
 
+  /**
+   * Cache ist ein reiner Beschleuniger — faellt Redis aus, darf das NIE den
+   * Request killen. get() liefert bei Fehler einen Cache-Miss (null), set()
+   * und del() sind best-effort. So bleibt die Suche live, auch wenn Redis
+   * kurzzeitig weg ist (statt 500 → direkter Provider-Call).
+   */
   async get<T>(key: string): Promise<T | null> {
-    const raw = await this.redis.get(key);
-    if (raw == null) return null;
     try {
+      const raw = await this.redis.get(key);
+      if (raw == null) return null;
       return JSON.parse(raw) as T;
-    } catch {
+    } catch (e) {
+      this.warnThrottled(`get(${key}) fehlgeschlagen: ${(e as Error).message}`);
       return null;
     }
   }
 
   async set<T>(key: string, value: T, ttlSeconds: number): Promise<void> {
-    await this.redis.set(key, JSON.stringify(value), 'EX', ttlSeconds);
+    try {
+      await this.redis.set(key, JSON.stringify(value), 'EX', ttlSeconds);
+    } catch (e) {
+      this.warnThrottled(`set(${key}) fehlgeschlagen: ${(e as Error).message}`);
+    }
   }
 
   async del(key: string): Promise<void> {
-    await this.redis.del(key);
+    try {
+      await this.redis.del(key);
+    } catch (e) {
+      this.warnThrottled(`del(${key}) fehlgeschlagen: ${(e as Error).message}`);
+    }
+  }
+
+  private warnThrottled(message: string) {
+    const now = Date.now();
+    if (now - this.lastErrorLogAt > 30_000) {
+      this.lastErrorLogAt = now;
+      this.logger.warn(`Redis nicht erreichbar (Cache uebersprungen): ${message}`);
+    }
   }
 
   searchKey({ lat, lng, radius, fuelType, sort }: SearchKeyParams): string {
