@@ -8,13 +8,14 @@
 
 class LegalIdentity {
   static const companyName = 'TradeRiver GmbH';
-  static const street = 'Kölner Str. 1';
+  static const street = 'Kölner Straße 1';
   static const zipCity = '51379 Leverkusen';
   static const country = 'Deutschland';
   static const email = '1ahrensj@gmail.com';
   static const phone = '';
-  static const representative = 'Leon Schneider';
+  static const representative = 'Jonathan Ahrens';
   static const representativeRole = 'Geschäftsführer';
+  static const registerInfo = 'Amtsgericht Köln, HRB 78219';
 
   static const addressBlock =
       '$companyName\n$street\n$zipCity\n$country';

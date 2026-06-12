@@ -14,6 +14,7 @@ class ImprintScreen extends StatelessWidget {
           'Anbieterkennzeichnung gemäß § 5 DDG / § 18 MStV.\n\n'
           '${LegalIdentity.addressBlock}\n\n'
           'Kontakt: ${LegalIdentity.email}\n\n'
+          'Registergericht: ${LegalIdentity.registerInfo}\n\n'
           'Vertretungsberechtigte Person: ${LegalIdentity.representative} '
           '(${LegalIdentity.representativeRole}).\n'
           'Verantwortlich nach § 18 Abs. 2 MStV: ${LegalIdentity.representative}, '
