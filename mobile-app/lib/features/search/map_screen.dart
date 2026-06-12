@@ -37,7 +37,29 @@ class _MapScreenState extends ConsumerState<MapScreen> {
 
   void _onMapCreated(GoogleMapController controller) {
     _controller = controller;
-    _loadStations();
+    // Bevorzugt das letzte Suchergebnis anzeigen (gesuchter Ort + Stationen),
+    // damit die Karte sofort gefuellt ist — auch ohne GPS-Freigabe (Web).
+    final last = ref.read(lastSearchProvider);
+    if (last != null && last.stations.isNotEmpty) {
+      _showLastSearch(last);
+    } else {
+      _loadStations();
+    }
+  }
+
+  void _showLastSearch(LastSearch last) {
+    _stations = last.stations;
+    _markers = _markersHelper.buildMarkers(
+      stations: _stations,
+      fuelType: last.fuelType,
+      onTap: _showStationSheet,
+    );
+    _controller?.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(last.centerLat, last.centerLng), zoom: 13),
+      ),
+    );
+    if (mounted) setState(() => _busy = false);
   }
 
   Future<void> _loadStations() async {
@@ -50,7 +72,9 @@ class _MapScreenState extends ConsumerState<MapScreen> {
       if (pos == null) {
         setState(() {
           _busy = false;
-          _error = 'Standort nicht verfuegbar';
+          _error =
+              'Standort nicht verfügbar. Such auf dem Tab „Suche" einen Ort — '
+              'die Treffer erscheinen dann hier auf der Karte.';
         });
         return;
       }

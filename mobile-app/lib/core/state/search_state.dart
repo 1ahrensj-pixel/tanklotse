@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
+import '../models/station.dart';
+
 class SearchPrefs {
   final String fuelType; // E5 / E10 / DIESEL
   final double radiusKm;
@@ -62,3 +64,25 @@ class SearchPrefsNotifier extends StateNotifier<SearchPrefs> {
 
 final searchPrefsProvider =
     StateNotifierProvider<SearchPrefsNotifier, SearchPrefs>((ref) => SearchPrefsNotifier());
+
+/// Ergebnis der letzten Suche — geteilt zwischen Such- und Karten-Screen.
+///
+/// Damit die Karte sofort die Stationen anzeigt, die der Nutzer gerade
+/// gesucht hat (am gesuchten Ort zentriert), statt beim Tab-Wechsel eine
+/// neue GPS-Suche zu starten. Auf dem Web ohne GPS-Freigabe blieb die Karte
+/// sonst leer ("keine Maps gesehen").
+class LastSearch {
+  final double centerLat;
+  final double centerLng;
+  final List<Station> stations;
+  final String fuelType;
+
+  const LastSearch({
+    required this.centerLat,
+    required this.centerLng,
+    required this.stations,
+    required this.fuelType,
+  });
+}
+
+final lastSearchProvider = StateProvider<LastSearch?>((ref) => null);

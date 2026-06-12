@@ -117,6 +117,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         _attribution = res.attribution;
         _busy = false;
       });
+      // Ergebnis teilen, damit der Karten-Tab dieselben Stationen am
+      // gesuchten Ort anzeigt — ohne erneute (auf Web oft fehlende) GPS-Suche.
+      ref.read(lastSearchProvider.notifier).state = LastSearch(
+        centerLat: lat,
+        centerLng: lng,
+        stations: res.stations,
+        fuelType: prefs.fuelType,
+      );
     } catch (e) {
       if (!mounted) return;
       setState(() {
@@ -278,9 +286,20 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             ],
             if (_stations.isNotEmpty) ...[
               const SizedBox(height: 16),
-              Text(
-                '${_stations.length} Tankstellen gefunden',
-                style: Theme.of(context).textTheme.titleMedium,
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      '${_stations.length} Tankstellen gefunden',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: () => context.go('/map'),
+                    icon: const Icon(Icons.map_outlined, size: 18),
+                    label: const Text('Auf Karte'),
+                  ),
+                ],
               ),
               const SizedBox(height: 8),
               ..._stations.map((s) {
