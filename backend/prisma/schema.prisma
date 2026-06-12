@@ -5,6 +5,10 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["postgresqlExtensions"]
+  // native = lokale Entwicklung (Windows/macOS/Linux-glibc).
+  // linux-musl-openssl-3.0.x = Alpine-Container in Production (Render/Docker).
+  // Ohne den musl-Target kann die Query-Engine im Alpine-Image nicht laden.
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
