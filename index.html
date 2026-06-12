@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/tanklotse/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="tanklotse">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>tanklotse</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!--
+    Google Maps JavaScript API (für google_maps_flutter auf Web).
+
+    WICHTIG — Der Platzhalter AIzaSyDq0TVWX1kIsggVfDcG7nvtBsi4UOcKmEY wird beim Build durch
+    den echten Key ersetzt/injiziert. Der echte Key darf NICHT in dieses
+    (öffentliche) Repo committet werden. Optionen:
+      * CI/Build-Schritt ersetzt den Platzhalter (z.B. via sed/envsubst)
+        aus einer Secret-Variable, bevor `flutter build web` läuft.
+      * Lokal manuell ersetzen — aber die Änderung NICHT committen.
+    Der Key MUSS in der Google Cloud Console per HTTP-Referrer auf die
+    Web-Domain(s) beschränkt werden. Siehe MAPS_SETUP.md.
+  -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDq0TVWX1kIsggVfDcG7nvtBsi4UOcKmEY"></script>
+</head>
+<body>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
