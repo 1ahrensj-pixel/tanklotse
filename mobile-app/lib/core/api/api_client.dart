@@ -15,8 +15,11 @@ final secureStorageProvider = Provider<FlutterSecureStorage>((ref) {
 final apiClientProvider = Provider<Dio>((ref) {
   final dio = Dio(BaseOptions(
     baseUrl: '$_apiBase/api',
-    connectTimeout: const Duration(seconds: 10),
-    receiveTimeout: const Duration(seconds: 15),
+    // Grosszuegige Timeouts: ein auf Free-Hosting (Render) schlafendes Backend
+    // braucht beim ersten Request bis zu ~60s zum Aufwachen (Cold-Start).
+    // Ein zu kurzer Timeout liesse die erste Suche faelschlich scheitern.
+    connectTimeout: const Duration(seconds: 60),
+    receiveTimeout: const Duration(seconds: 60),
     headers: {'User-Agent': 'TankLotse-Mobile/1.0'},
   ),);
   final storage = ref.read(secureStorageProvider);

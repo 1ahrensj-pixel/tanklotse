@@ -53,11 +53,18 @@ export default function HomePage() {
               Tankstelle wirklich lohnt.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/app" className="btn-primary">App holen</Link>
-              <Link href="/funktionen" className="btn-ghost">Mehr erfahren</Link>
+              <a
+                href="https://1ahrensj-pixel.github.io/tanklotse/"
+                className="btn-primary"
+                target="_blank"
+                rel="noopener"
+              >
+                Jetzt im Browser nutzen
+              </a>
+              <Link href="/app" className="btn-ghost">App holen</Link>
             </div>
             <p className="mt-6 text-xs text-brand-800 dark:text-brand-100">
-              Verfügbar für iOS und Android. Auch ohne Konto nutzbar.
+              Direkt im Browser — keine Installation nötig. Auch für iOS und Android als App.
             </p>
             <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-brand-800 dark:text-brand-100" aria-label="Vertrauensmerkmale">
               <li className="inline-flex items-center gap-1.5"><span aria-hidden="true">✓</span> Amtliche MTS-K-Daten</li>
