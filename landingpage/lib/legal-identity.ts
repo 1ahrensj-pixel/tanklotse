@@ -17,7 +17,7 @@ export const legalIdentity = {
   zipCity: '51379 Leverkusen',
   country: 'Deutschland',
   /** Erreichbarkeit. */
-  email: '1ahrensj@gmail.com',
+  email: 'info@ahrens-re.de',
   phone: '',
   /** Vertretungsberechtigte natürliche Person (laut Handelsregister). */
   representative: 'Jonathan Ahrens',

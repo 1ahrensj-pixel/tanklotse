@@ -105,7 +105,7 @@ services:
         value: "TankLotse <onboarding@resend.dev>"
       # --- Admin-Seed (sync:false) ---
       - key: ADMIN_SEED_EMAIL
-        value: 1ahrensj@gmail.com
+        value: info@ahrens-re.de
       - key: ADMIN_SEED_PASSWORD
         sync: false
       - key: SWAGGER_ENABLED
@@ -124,7 +124,7 @@ services:
       - key: NEXT_PUBLIC_SITE_URL
         value: https://tanklotse-landing.onrender.com
       - key: NEXT_PUBLIC_SUPPORT_EMAIL
-        value: 1ahrensj@gmail.com
+        value: info@ahrens-re.de
 
   - type: web
     name: tanklotse-admin

@@ -31,7 +31,7 @@
 ## Secrets
 
 Liegen ausschließlich als Render-Env-Variablen (sync:false) — **nicht im Repo**.
-- Admin-Login: `1ahrensj@gmail.com` (Passwort beim Seed generiert, im Render-Panel + Chat-Übergabe)
+- Admin-Login: `info@ahrens-re.de` (Passwort beim Seed generiert, im Render-Panel + Chat-Übergabe)
 - JWT-/Cookie-Secrets: zufällig generiert beim Deploy (`audit/render-deploy-state.json`, gitignored)
 
 ## DB-Anbindung — wichtige Lessons

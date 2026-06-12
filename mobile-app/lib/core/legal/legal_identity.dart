@@ -11,7 +11,7 @@ class LegalIdentity {
   static const street = 'Kölner Straße 1';
   static const zipCity = '51379 Leverkusen';
   static const country = 'Deutschland';
-  static const email = '1ahrensj@gmail.com';
+  static const email = 'info@ahrens-re.de';
   static const phone = '';
   static const representative = 'Jonathan Ahrens';
   static const representativeRole = 'Geschäftsführer';
