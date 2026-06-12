@@ -22,7 +22,7 @@ import {
 
 export type FuelProvider = 'tankerkoenig' | 'mtsk' | 'mock';
 export type GeocoderProvider = 'nominatim' | 'mapbox' | 'mock';
-export type RoutingProvider = 'noop' | 'mapbox' | 'graphhopper';
+export type RoutingProvider = 'noop' | 'mapbox' | 'graphhopper' | 'google';
 export type SubscriptionProvider =
   | 'none'
   | 'apple'
@@ -226,7 +226,7 @@ export function getExternalServicesConfig(
 
   const routingProvider = parseEnumOrThrow<RoutingProvider>(
     env.ROUTING_PROVIDER,
-    ['noop', 'mapbox', 'graphhopper'],
+    ['noop', 'mapbox', 'graphhopper', 'google'],
     'noop',
     'ROUTING_PROVIDER',
   );

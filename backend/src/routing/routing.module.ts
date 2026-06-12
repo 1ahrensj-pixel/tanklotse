@@ -4,6 +4,7 @@ import {
   assertMockAllowed,
   parseProviderMode,
 } from '../common/providers/provider-mode.types';
+import { GoogleRoutingDistanceService } from './google-routing-distance.service';
 import { GraphhopperRoutingDistanceService } from './graphhopper-routing-distance.service';
 import { MapboxRoutingDistanceService } from './mapbox-routing-distance.service';
 import { MockRoutingDistanceService } from './mock-routing-distance.service';
@@ -37,6 +38,7 @@ const routingDistanceProvider: Provider = {
   provide: ROUTING_DISTANCE_SERVICE,
   useFactory: (
     mapbox: MapboxRoutingDistanceService,
+    google: GoogleRoutingDistanceService,
     graphhopper: GraphhopperRoutingDistanceService,
     noop: NoopRoutingDistanceService,
   ): RoutingDistanceService => {
@@ -70,6 +72,15 @@ const routingDistanceProvider: Provider = {
       return mapbox;
     }
 
+    if (provider === 'google') {
+      if (!google.isPreciseRoutingAvailable()) {
+        // Gleicher Vertrag wie mapbox: fehlender/Platzhalter-Key →
+        // Noop-Fallback statt Crash; App liefert weiter Schaetzungen.
+        return noop;
+      }
+      return google;
+    }
+
     if (provider === 'graphhopper') {
       if (isProd) {
         throw new Error(
@@ -87,11 +98,12 @@ const routingDistanceProvider: Provider = {
     // Audit 2026-05-06 §13 Aufgabe 1: kein stiller Fallback bei
     // Tippfehlern wie ROUTING_PROVIDER=mapboxx. Hart fehlschlagen.
     throw new Error(
-      `ROUTING_PROVIDER ist ungueltig: "${provider}". Erlaubt: noop, mapbox, graphhopper.`,
+      `ROUTING_PROVIDER ist ungueltig: "${provider}". Erlaubt: noop, mapbox, google, graphhopper.`,
     );
   },
   inject: [
     MapboxRoutingDistanceService,
+    GoogleRoutingDistanceService,
     GraphhopperRoutingDistanceService,
     NoopRoutingDistanceService,
   ],
@@ -102,6 +114,7 @@ const routingDistanceProvider: Provider = {
   imports: [RoutingMetricsModule],
   providers: [
     MapboxRoutingDistanceService,
+    GoogleRoutingDistanceService,
     GraphhopperRoutingDistanceService,
     NoopRoutingDistanceService,
     routingDistanceProvider,
