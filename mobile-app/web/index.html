@@ -31,6 +31,20 @@
 
   <title>tanklotse</title>
   <link rel="manifest" href="manifest.json">
+
+  <!--
+    Google Maps JavaScript API (für google_maps_flutter auf Web).
+
+    WICHTIG — Der Platzhalter YOUR_GOOGLE_MAPS_API_KEY wird beim Build durch
+    den echten Key ersetzt/injiziert. Der echte Key darf NICHT in dieses
+    (öffentliche) Repo committet werden. Optionen:
+      * CI/Build-Schritt ersetzt den Platzhalter (z.B. via sed/envsubst)
+        aus einer Secret-Variable, bevor `flutter build web` läuft.
+      * Lokal manuell ersetzen — aber die Änderung NICHT committen.
+    Der Key MUSS in der Google Cloud Console per HTTP-Referrer auf die
+    Web-Domain(s) beschränkt werden. Siehe MAPS_SETUP.md.
+  -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>

@@ -1,0 +1,12 @@
+// Vorlage fuer ios/Flutter/Maps.xcconfig — diese .example ist committet,
+// die echte Maps.xcconfig ist gitignored und enthaelt den echten Key.
+//
+// Kopieren:  cp ios/Flutter/Maps.xcconfig.example ios/Flutter/Maps.xcconfig
+// In den Build-Konfigurationen (Debug.xcconfig / Release.xcconfig) muss
+//   #include "Maps.xcconfig"
+// stehen, damit $(GOOGLE_MAPS_API_KEY) in Info.plist aufgeloest wird.
+//
+// Der Key MUSS in der Google Cloud Console per Bundle-ID (de.tanklotse.app)
+// beschraenkt werden. Siehe MAPS_SETUP.md.
+
+GOOGLE_MAPS_API_KEY=YOUR_IOS_MAPS_API_KEY

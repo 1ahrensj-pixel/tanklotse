@@ -1,0 +1,10 @@
+# Vorlage fuer android/key.properties — DIESE Datei ist committet, die echte
+# android/key.properties ist in .gitignore und enthaelt den echten Key.
+#
+# Kopieren:  cp android/key.properties.example android/key.properties
+# Dann den echten Google-Maps-Android-SDK-Key eintragen.
+#
+# Der Key MUSS in der Google Cloud Console per Paketname (de.tanklotse.app)
+# + App-SHA-1-Fingerprint beschraenkt werden. Siehe MAPS_SETUP.md.
+
+MAPS_API_KEY=YOUR_ANDROID_MAPS_API_KEY

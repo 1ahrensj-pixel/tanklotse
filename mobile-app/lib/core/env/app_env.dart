@@ -6,7 +6,7 @@
 ///     --dart-define=APP_ENV=staging-preview \
 ///     --dart-define=PROVIDER_SIMULATION_ACTIVE=true \
 ///     --dart-define=API_BASE_URL=https://api-staging.example \
-///     --dart-define=MAPBOX_PUBLIC_TOKEN=pk.real-public-token
+///     --dart-define=GOOGLE_MAPS_API_KEY=AIza...real-key
 ///
 /// Wahrheits-Garantie: wenn `providerSimulationActive=true` ist, MUSS die UI
 /// einen `SimulationBanner` anzeigen — sonst koennte ein Tester die Demo
@@ -31,4 +31,15 @@ class AppEnv {
       appEnv == 'staging' || appEnv == 'staging-preview';
 
   static bool get isProduction => appEnv == 'production';
+
+  /// Google-Maps-API-Key fuer die Kartenanzeige (Web + Dart-Layer).
+  ///
+  /// Wird zur Build-Zeit per `--dart-define=GOOGLE_MAPS_API_KEY=AIza...`
+  /// gesetzt. NIEMALS hardcoden — das Repo ist oeffentlich. Auf Android/iOS
+  /// wird der Key zusaetzlich nativ ueber Manifest-/Plist-Platzhalter injiziert
+  /// (siehe MAPS_SETUP.md).
+  static const String googleMapsApiKey = String.fromEnvironment(
+    'GOOGLE_MAPS_API_KEY',
+    defaultValue: '',
+  );
 }

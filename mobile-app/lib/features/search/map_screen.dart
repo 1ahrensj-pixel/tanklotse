@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart' as geo;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/env/app_env.dart';
 import '../../core/models/station.dart';
 import '../../core/repositories/stations_repository.dart';
 import '../../core/services/location_service.dart';
 import '../../core/state/search_state.dart';
 import 'map_markers_helper.dart';
-
-const _mapboxToken = String.fromEnvironment('MAPBOX_PUBLIC_TOKEN', defaultValue: '');
 
 class MapScreen extends ConsumerStatefulWidget {
   const MapScreen({super.key});
@@ -21,24 +19,25 @@ class MapScreen extends ConsumerStatefulWidget {
 }
 
 class _MapScreenState extends ConsumerState<MapScreen> {
-  MapMarkersHelper? _markersHelper;
+  static const _markersHelper = MapMarkersHelper();
+
+  /// Initiale Kamera: DE-Mittelpunkt, bis der echte Standort geladen ist.
+  static const _germanyCenter = CameraPosition(
+    target: LatLng(51.16, 10.45),
+    zoom: 5,
+  );
+
+  GoogleMapController? _controller;
   bool _busy = false;
   String? _error;
   List<Station> _stations = const [];
-  final bool _tokenSet = _mapboxToken.isNotEmpty;
+  Set<Marker> _markers = const {};
 
-  @override
-  void initState() {
-    super.initState();
-    if (_tokenSet) {
-      MapboxOptions.setAccessToken(_mapboxToken);
-    }
-  }
+  final bool _keySet = AppEnv.googleMapsApiKey.isNotEmpty;
 
-  Future<void> _onMapCreated(MapboxMap map) async {
-    final markers = await map.annotations.createPointAnnotationManager();
-    _markersHelper = MapMarkersHelper(map: map, markers: markers);
-    await _loadStations();
+  void _onMapCreated(GoogleMapController controller) {
+    _controller = controller;
+    _loadStations();
   }
 
   Future<void> _loadStations() async {
@@ -64,7 +63,21 @@ class _MapScreenState extends ConsumerState<MapScreen> {
             onlyOpen: prefs.onlyOpen,
           );
       _stations = res.stations;
-      await _renderMarkers(pos);
+      _markers = _markersHelper.buildMarkers(
+        stations: _stations,
+        fuelType: prefs.fuelType,
+        onTap: _showStationSheet,
+      );
+
+      // Kamera auf den Such-Standort zentrieren; wenn keiner verfuegbar ist,
+      // auf die erste Station ausweichen.
+      final LatLng target = LatLng(pos.latitude, pos.longitude);
+      await _controller?.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: target, zoom: 13),
+        ),
+      );
+
       if (!mounted) return;
       setState(() => _busy = false);
     } catch (e) {
@@ -74,16 +87,6 @@ class _MapScreenState extends ConsumerState<MapScreen> {
         _error = e.toString();
       });
     }
-  }
-
-  Future<void> _renderMarkers(geo.Position pos) async {
-    final helper = _markersHelper;
-    if (helper == null) return;
-    await helper.renderStations(
-      stations: _stations,
-      fuelType: ref.read(searchPrefsProvider).fuelType,
-      center: pos,
-    );
   }
 
   void _showStationSheet(Station s) {
@@ -137,7 +140,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_tokenSet) {
+    if (!_keySet) {
       return Scaffold(
         appBar: AppBar(title: const Text('Karte')),
         body: const Center(
@@ -149,14 +152,14 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                 Icon(Icons.map_outlined, size: 64),
                 SizedBox(height: 16),
                 Text(
-                  'Mapbox-Token fehlt. Beim Build mit '
-                  '--dart-define=MAPBOX_PUBLIC_TOKEN=pk.xxx übergeben.',
+                  'Google-Maps-API-Key fehlt. Beim Build mit '
+                  '--dart-define=GOOGLE_MAPS_API_KEY=AIza... übergeben.',
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Karte funktioniert real, sobald ein Token gesetzt ist. '
-                  'Liste und Suche bleiben in dieser App ohne Token uneingeschränkt nutzbar.',
+                  'Karte funktioniert real, sobald ein Key gesetzt ist. '
+                  'Liste und Suche bleiben in dieser App ohne Key uneingeschränkt nutzbar.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 12),
                 ),
@@ -178,27 +181,11 @@ class _MapScreenState extends ConsumerState<MapScreen> {
       ),
       body: Stack(
         children: [
-          MapWidget(
-            cameraOptions: CameraOptions(
-              center: Point(coordinates: Position(10.45, 51.16)), // DE-Mittelpunkt
-              zoom: 5,
-            ),
+          GoogleMap(
+            initialCameraPosition: _germanyCenter,
             onMapCreated: _onMapCreated,
-            onTapListener: (ctx) async {
-              // Treffer-Annotation: einfacher Ansatz – das räumlich nächstgelegene
-              // Element aus der bekannten Liste suchen.
-              final t = ctx.point.coordinates;
-              Station? nearest;
-              double bestKm = 0.5;
-              for (final s in _stations) {
-                final d = _haversineKm(t.lat as double, t.lng as double, s.lat, s.lng);
-                if (d < bestKm) {
-                  bestKm = d;
-                  nearest = s;
-                }
-              }
-              if (nearest != null && mounted) _showStationSheet(nearest);
-            },
+            markers: _markers,
+            myLocationButtonEnabled: false,
           ),
           if (_busy) const Positioned(top: 16, right: 16, child: CircularProgressIndicator()),
           if (_error != null)
@@ -219,15 +206,3 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     );
   }
 }
-
-double _haversineKm(double lat1, double lng1, double lat2, double lng2) {
-  const r = 6371.0;
-  final dLat = _rad(lat2 - lat1);
-  final dLng = _rad(lng2 - lng1);
-  final a = (dLat / 2).abs() * (dLat / 2).abs() +
-      _cos(_rad(lat1)) * _cos(_rad(lat2)) * (dLng / 2).abs() * (dLng / 2).abs();
-  return 2 * r * a;
-}
-
-double _rad(double d) => d * 3.141592653589793 / 180.0;
-double _cos(double x) => (1 - x * x / 2 + x * x * x * x / 24).abs();

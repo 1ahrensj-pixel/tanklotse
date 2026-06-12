@@ -1,0 +1,57 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // Das Flutter-Gradle-Plugin muss nach den Android-/Kotlin-Plugins kommen.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+// --- Google-Maps-API-Key Injektion ---------------------------------------
+// Der echte Key wird NICHT committet. Er wird hier aus einer gitignored
+// Datei (android/key.properties) gelesen ODER aus einer Gradle-Property
+// (-PMAPS_API_KEY=... bzw. ORG_GRADLE_PROJECT_MAPS_API_KEY), mit Fallback
+// auf Leerstring, damit Builds ohne Key nicht brechen.
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withInputStream { keystoreProperties.load(it) }
+}
+
+def mapsApiKey = keystoreProperties.getProperty("MAPS_API_KEY")
+        ?: (project.findProperty("MAPS_API_KEY") ?: "")
+
+android {
+    namespace = "de.tanklotse.app"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "de.tanklotse.app"
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+
+        // Speist den Manifest-Placeholder ${MAPS_API_KEY}.
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
+    }
+
+    buildTypes {
+        release {
+            // TODO: Vor Produktiv-Release auf eigene Signierkonfig umstellen.
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}

@@ -1,0 +1,45 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Standort wird fuer die Tankstellen-Suche benoetigt. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:label="TankLotse"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+
+        <!--
+            Google-Maps-Android-SDK-API-Key.
+
+            WICHTIG — Der echte Key wird NICHT hier eingetragen. Stattdessen
+            kommt er ueber den Manifest-Placeholder ${MAPS_API_KEY}, der in
+            android/app/build.gradle aus der gitignored Datei
+            android/key.properties (oder einer Gradle-Property) gefuellt wird,
+            mit Fallback auf Leerstring. So landet der Key nie im oeffentlichen
+            Repo. Der Key MUSS in der Google Cloud Console per Paketname +
+            SHA-1 beschraenkt werden. Siehe MAPS_SETUP.md.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2"/>
+    </application>
+</manifest>
